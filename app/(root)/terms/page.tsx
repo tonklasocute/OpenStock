@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { Shield, FileText, Check, AlertTriangle, Scale } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | OpenStock',
+  title: 'Terms of Service | tonklasocute',
   description: 'Fair, transparent, and open terms for our community.',
 };
 
@@ -15,7 +15,7 @@ export default function TermsPage() {
         <div className="inline-flex p-3 bg-teal-500/10 rounded-2xl border border-teal-500/20 mb-4">
           <Scale className="text-teal-400 h-8 w-8" />
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold text-white">Terms of Service</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-100">Terms of Service</h1>
         <p className="text-xl text-gray-400 max-w-2xl mx-auto">
           Built on trust, transparency, and community values. No hidden gotchas, just clear rules.
         </p>
@@ -25,7 +25,7 @@ export default function TermsPage() {
       <div className="space-y-12">
         {/* Core Philosophy */}
         <section className="bg-gray-900 border border-gray-800 rounded-2xl p-8">
-          <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-gray-100 mb-6 flex items-center gap-2">
             <Shield className="text-teal-500" />
             Our Promise
           </h2>
@@ -44,7 +44,7 @@ export default function TermsPage() {
             <div>
               <h3 className="text-xl font-bold text-yellow-100 mb-2">Investment Disclaimer</h3>
               <p className="text-yellow-200/80 leading-relaxed">
-                **OpenStock is an educational and analysis tool, not a financial advisor.**
+                **tonklasocute is an educational and analysis tool, not a financial advisor.**
                 Data is provided "as is" for informational purposes. Never invest money you cannot afford to lose.
                 Always conduct your own research or consult a certified professional before making financial decisions.
               </p>
@@ -54,7 +54,7 @@ export default function TermsPage() {
 
         {/* User Responsibilities */}
         <section>
-          <h2 className="text-2xl font-bold text-white mb-6">Community Rules</h2>
+          <h2 className="text-2xl font-bold text-gray-100 mb-6">Community Rules</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-gray-900 border border-gray-800 p-6 rounded-xl">
               <h3 className="text-lg font-semibold text-blue-400 mb-4">✅ Do's</h3>
@@ -78,7 +78,8 @@ export default function TermsPage() {
         {/* Footer Note */}
         <div className="text-center pt-8 border-t border-gray-800">
           <p className="text-gray-500">
-            Questions about these terms? Email us at <a href="mailto:opendevsociety@gmail.com" className="text-teal-400 hover:underline">opendevsociety@gmail.com</a>
+            {/* TODO: replace with your own contact email before deploying */}
+            Questions about these terms? Email us at <a href="mailto:support@tonklasocute.com" className="text-teal-400 hover:underline">support@tonklasocute.com</a>
           </p>
         </div>
       </div>

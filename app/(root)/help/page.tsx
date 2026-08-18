@@ -10,14 +10,14 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Help Center | OpenStock',
-  description: 'Community-driven support for OpenStock. No paywalls, just help.',
+  title: 'Help Center | tonklasocute',
+  description: 'Community-driven support for tonklasocute. No paywalls, just help.',
 };
 
 export default function HelpPage() {
   const faqs = [
     {
-      question: "Is OpenStock really free forever?",
+      question: "Is tonklasocute really free forever?",
       answer: "Yes! We run on donations and community contribution. Core features (tracking, alerts, analysis) will remain free. We believe financial tools shouldn't be luxury items."
     },
     {
@@ -46,12 +46,12 @@ export default function HelpPage() {
         <div className="inline-flex p-3 bg-blue-500/10 rounded-2xl border border-blue-500/20 mb-4">
           <HelpCircle className="text-blue-400 h-8 w-8" />
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold text-white">How can we help?</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-100">How can we help?</h1>
         <p className="text-xl text-gray-400">Community-powered support for everyone.</p>
       </div>
 
       {/* Quick Action Grid */}
-      <div className="grid md:grid-cols-3 gap-4 mb-16">
+      <div className="grid md:grid-cols-1 gap-4 mb-16 max-w-sm mx-auto">
         <HelpCard
           icon={<BookOpen className="text-teal-400" />}
           title="Read Docs"
@@ -59,25 +59,11 @@ export default function HelpPage() {
           link="/api-docs"
           linkText="View Documentation"
         />
-        <HelpCard
-          icon={<MessageCircle className="text-purple-400" />}
-          title="Community Chat"
-          desc="Get real-time answers from other users."
-          link="https://discord.gg/JkJ8kfxgxB"
-          linkText="Join Discord"
-        />
-        <HelpCard
-          icon={<Github className="text-white" />}
-          title="Report Bugs"
-          desc="Found an issue? Let our developers know."
-          link="https://github.com/Open-Dev-Society/OpenStock/issues"
-          linkText="Open Issue"
-        />
       </div>
 
       {/* FAQs */}
       <div className="space-y-8">
-        <h2 className="text-2xl font-bold text-white border-b border-gray-800 pb-4">Frequently Asked Questions</h2>
+        <h2 className="text-2xl font-bold text-gray-100 border-b border-gray-800 pb-4">Frequently Asked Questions</h2>
         <div className="grid gap-4">
           {faqs.map((faq, idx) => (
             <div key={idx} className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:bg-gray-800/50 transition-colors">
@@ -94,12 +80,13 @@ export default function HelpPage() {
       </div>
 
       {/* Direct Contact */}
-      <div className="mt-20 bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-8 text-center">
-        <h3 className="text-xl font-bold text-white mb-2">Still stuck?</h3>
+      <div className="mt-20 bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800 rounded-2xl p-8 text-center">
+        <h3 className="text-xl font-bold text-gray-100 mb-2">Still stuck?</h3>
         <p className="text-gray-400 mb-6">Our team (and community) answers emails, usually entirely for free.</p>
+        {/* TODO: replace with your own contact email before deploying */}
         <a
-          href="mailto:opendevsociety@gmail.com"
-          className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+          href="mailto:support@tonklasocute.com"
+          className="inline-flex items-center gap-2 bg-teal-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-teal-600 transition-colors"
         >
           <Mail size={18} />
           Contact Support
@@ -114,7 +101,7 @@ function HelpCard({ icon, title, desc, link, linkText }: any) {
   return (
     <div className="bg-gray-900 border border-gray-800 p-6 rounded-xl flex flex-col items-start hover:border-gray-700 transition-colors">
       <div className="mb-4 bg-gray-800 p-2 rounded-lg">{icon}</div>
-      <h3 className="font-bold text-white text-lg mb-2">{title}</h3>
+      <h3 className="font-bold text-gray-100 text-lg mb-2">{title}</h3>
       <p className="text-sm text-gray-400 mb-6 flex-grow">{desc}</p>
       <a href={link} className="text-teal-400 text-sm font-medium hover:underline flex items-center gap-1">
         {linkText} <ChevronDown size={14} className="-rotate-90" />
