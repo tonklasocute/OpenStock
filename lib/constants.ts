@@ -39,7 +39,7 @@ export const CONDITION_OPTIONS = [
 
 // TradingView Charts
 export const MARKET_OVERVIEW_WIDGET_CONFIG = {
-    colorTheme: 'dark', // dark mode
+    colorTheme: 'light', // dark mode
     dateRange: '12M', // last 12 months
     locale: 'en', // language
     largeChartUrl: '', // link to a large chart if needed
@@ -104,7 +104,7 @@ export const HEATMAP_WIDGET_CONFIG = {
     isTransparent: true,
     locale: 'en',
     symbolUrl: '',
-    colorTheme: 'dark',
+    colorTheme: 'light',
     exchanges: [],
     hasTopBar: false,
     isDataSetEnabled: false,
@@ -118,7 +118,7 @@ export const HEATMAP_WIDGET_CONFIG = {
 export const TOP_STORIES_WIDGET_CONFIG = {
     displayMode: 'regular',
     feedMode: 'market',
-    colorTheme: 'dark',
+    colorTheme: 'light',
     isTransparent: true,
     locale: 'en',
     market: 'stock',
@@ -132,7 +132,7 @@ export const MARKET_DATA_WIDGET_CONFIG = {
     height: 600,
     locale: 'en',
     showSymbolLogo: true,
-    colorTheme: 'dark',
+    colorTheme: 'light',
     isTransparent: false,
     backgroundColor: '#0F0F0F',
     symbolsGroups: [
@@ -173,7 +173,7 @@ export const MARKET_DATA_WIDGET_CONFIG = {
 
 export const SYMBOL_INFO_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
-    colorTheme: 'dark',
+    colorTheme: 'light',
     isTransparent: true,
     locale: 'en',
     width: '100%',
@@ -234,7 +234,7 @@ export const BASELINE_WIDGET_CONFIG = (symbol: string) => ({
 
 export const TECHNICAL_ANALYSIS_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
-    colorTheme: 'dark',
+    colorTheme: 'light',
     isTransparent: 'true',
     locale: 'en',
     width: '100%',
@@ -245,7 +245,7 @@ export const TECHNICAL_ANALYSIS_WIDGET_CONFIG = (symbol: string) => ({
 
 export const COMPANY_PROFILE_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
-    colorTheme: 'dark',
+    colorTheme: 'light',
     isTransparent: 'true',
     locale: 'en',
     width: '100%',
@@ -254,7 +254,7 @@ export const COMPANY_PROFILE_WIDGET_CONFIG = (symbol: string) => ({
 
 export const COMPANY_FINANCIALS_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
-    colorTheme: 'dark',
+    colorTheme: 'light',
     isTransparent: 'true',
     locale: 'en',
     width: '100%',

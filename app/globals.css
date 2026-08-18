@@ -114,19 +114,23 @@
 
 /* === CUSTOM COLOR THEME === */
 @theme {
-    /* Extended Gray Scale */
-    --color-gray-900: #050505;
-    --color-gray-800: #141414;
-    --color-gray-700: #212328;
-    --color-gray-600: #30333A;
-    --color-gray-500: #9095A1;
-    --color-gray-400: #CCDADC;
+    /* Extended Gray Scale — light pastel-pink theme */
+    --color-gray-900: #FDF2F8;
+    --color-gray-800: #FFFFFF;
+    --color-gray-700: #FCE7F3;
+    --color-gray-600: #FBCFE8;
+    --color-gray-500: #6B7280;
+    --color-gray-400: #1F2937;
+    --color-gray-300: #374151;
+    --color-gray-200: #111827;
+    --color-gray-100: #0B0F19;
 
     /* Vibrant Colors */
     --color-blue-600: #5862FF;
     --color-yellow-400: #FDD458;
     --color-yellow-500: #E8BA40;
-    --color-teal-400: #0FEDBE;
+    --color-teal-400: #F472B6;
+    --color-teal-500: #EC4899;
     --color-red-500: #FF495B;
     --color-orange-500: #FF8243;
     --color-purple-500: #D13BFF;
