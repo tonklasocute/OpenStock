@@ -24,7 +24,7 @@ export default function TermsPage() {
 
       <div className="space-y-12">
         {/* Core Philosophy */}
-        <section className="bg-gray-900 border border-gray-800 rounded-2xl p-8">
+        <section className="bg-gray-900 border border-gray-600 rounded-2xl p-8">
           <h2 className="text-2xl font-bold text-gray-100 mb-6 flex items-center gap-2">
             <Shield className="text-teal-500" />
             Our Promise
@@ -56,7 +56,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-2xl font-bold text-gray-100 mb-6">Community Rules</h2>
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gray-900 border border-gray-800 p-6 rounded-xl">
+            <div className="bg-gray-900 border border-gray-600 p-6 rounded-xl">
               <h3 className="text-lg font-semibold text-blue-400 mb-4">✅ Do's</h3>
               <ul className="space-y-3 text-gray-400">
                 <li className="flex gap-2"><Check size={16} className="text-blue-500 mt-1" /> Share knowledge freely</li>
@@ -64,7 +64,7 @@ export default function TermsPage() {
                 <li className="flex gap-2"><Check size={16} className="text-blue-500 mt-1" /> Respect other members</li>
               </ul>
             </div>
-            <div className="bg-gray-900 border border-gray-800 p-6 rounded-xl">
+            <div className="bg-gray-900 border border-gray-600 p-6 rounded-xl">
               <h3 className="text-lg font-semibold text-red-400 mb-4">❌ Don'ts</h3>
               <ul className="space-y-3 text-gray-400">
                 <li className="flex gap-2"><span className="text-red-500 font-bold">×</span> Scrape data excessively</li>
@@ -76,7 +76,7 @@ export default function TermsPage() {
         </section>
 
         {/* Footer Note */}
-        <div className="text-center pt-8 border-t border-gray-800">
+        <div className="text-center pt-8 border-t border-gray-600">
           <p className="text-gray-500">
             {/* TODO: replace with your own contact email before deploying */}
             Questions about these terms? Email us at <a href="mailto:support@tonklasocute.com" className="text-teal-400 hover:underline">support@tonklasocute.com</a>

@@ -57,7 +57,7 @@ export default function AboutPage() {
             </section>
 
             {/* Story Section */}
-            <section className="grid md:grid-cols-2 gap-12 items-center mb-24 bg-gray-900/30 p-8 md:p-12 rounded-3xl border border-gray-800">
+            <section className="grid md:grid-cols-2 gap-12 items-center mb-24 bg-gray-900/30 p-8 md:p-12 rounded-3xl border border-gray-600">
                 <div className="space-y-6">
                     <h2 className="text-3xl font-bold text-gray-100">Powered by Open Dev Society</h2>
                     <p className="text-gray-400 leading-relaxed text-lg">
@@ -93,7 +93,7 @@ function FeatureCard({ icon, title, desc, color }: any) {
     };
 
     return (
-        <div className={`bg-gray-900/50 border border-gray-800 p-8 rounded-2xl transition-all duration-300 hover:-translate-y-1 ${borders[color]}`}>
+        <div className={`bg-gray-900/50 border border-gray-600 p-8 rounded-2xl transition-all duration-300 hover:-translate-y-1 ${borders[color]}`}>
             <div className="mb-6 p-3 bg-gray-800 w-fit rounded-xl">{icon}</div>
             <h3 className="text-xl font-bold text-gray-100 mb-3">{title}</h3>
             <p className="text-gray-400 leading-relaxed font-light">{desc}</p>

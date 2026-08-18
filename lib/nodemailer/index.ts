@@ -47,10 +47,10 @@ export const sendWelcomeEmail = async ({ email, name, intro }: WelcomeEmailData)
             .replace('{{intro}}', intro);
 
         const mailOptions = {
-            from: `"Openstock" <${process.env.NODEMAILER_EMAIL}>`,
+            from: `"tonklasocute" <${process.env.NODEMAILER_EMAIL}>`,
             to: email,
-            subject: `Welcome to Openstock - your open-source stock market toolkit!`,
-            text: 'Thanks for joining Openstock, an initiative by open dev society',
+            subject: `Welcome to tonklasocute - your open-source stock market toolkit!`,
+            text: 'Thanks for joining tonklasocute, built on the open-source OpenStock project by Open Dev Society',
             html: htmlTemplate,
         };
 
@@ -77,10 +77,10 @@ export const sendNewsSummaryEmail = async (
             .replace('{{newsContent}}', newsContent);
 
         const mailOptions = {
-            from: `"Openstock" <${process.env.NODEMAILER_EMAIL}>`,
+            from: `"tonklasocute" <${process.env.NODEMAILER_EMAIL}>`,
             to: email,
             subject: `📈 Market News Summary Today - ${date}`,
-            text: `Today's market news summary from Openstock`,
+            text: `Today's market news summary from tonklasocute`,
             html: htmlTemplate,
         };
 

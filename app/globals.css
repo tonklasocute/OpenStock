@@ -131,6 +131,8 @@
     --color-yellow-500: #E8BA40;
     --color-teal-400: #F472B6;
     --color-teal-500: #EC4899;
+    --color-teal-300: #f9a8d4;
+    --color-teal-600: #db2777;
     --color-red-500: #FF495B;
     --color-orange-500: #FF8243;
     --color-purple-500: #D13BFF;
@@ -192,10 +194,10 @@
         @apply text-sm font-medium text-gray-400;
     }
     .form-input {
-        @apply h-12 px-3 py-3 text-white text-base placeholder:text-gray-600 border-gray-600  rounded-lg focus:!border-teal-500 focus:ring-0 ;
+        @apply h-12 px-3 py-3 text-gray-100 text-base placeholder:text-gray-500 border-gray-600  rounded-lg focus:!border-teal-500 focus:ring-0 ;
     }
     .select-trigger {
-        @apply w-full !h-12 px-3 py-3 text-base border-gray-600 bg-gray-800 text-white rounded-lg focus:!border-teal-500 focus:ring-0;
+        @apply w-full !h-12 px-3 py-3 text-base border-gray-600 bg-gray-800 text-gray-100 rounded-lg focus:!border-teal-500 focus:ring-0;
     }
     .country-select-trigger {
         @apply h-12 px-3 py-3 text-base w-full justify-between font-normal border-gray-600 bg-gray-800 text-gray-400 rounded-lg focus:!border-teal-500 focus:ring-0;
@@ -207,7 +209,7 @@
         @apply text-gray-500 py-6 text-center !bg-gray-800;
     }
     .country-select-item {
-        @apply text-white cursor-pointer px-3 py-2 rounded-sm bg-gray-800 hover:!bg-gray-600;
+        @apply text-gray-100 cursor-pointer px-3 py-2 rounded-sm bg-gray-800 hover:!bg-gray-600;
     }
     .footer-link {
         @apply text-gray-400 font-medium hover:text-teal-400 hover:underline transition-colors;
@@ -395,30 +397,30 @@
 /* TradingView Advanced Chart Widget Styles */
 .tradingview-widget-container {
     position: relative;
-    background-color: #141414 !important;
+    background-color: #FFFFFF !important;
     border-radius: 8px !important;
     overflow: hidden !important;
 }
 
 .tv-embed-widget-wrapper__body {
-    background-color: #141414 !important;
+    background-color: #FFFFFF !important;
 }
 
 .tradingview-widget-container__widget {
-    background-color: #141414 !important;
+    background-color: #FFFFFF !important;
     height: 100% !important;
 
 }
 
 .widget-stock-heatmap-container .screenerMapWrapper-BBVfGP0b {
     overflow: hidden !important;
-    background: #141414 !important;
-    background-color: #141414 !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
 }
 
 .canvasContainer-tyaAU8aH {
-    background: #141414 !important;
-    background-color: #141414 !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
 }
 
 .tv-site-widget--bg_none {
@@ -445,17 +447,17 @@
 }
 
 .tv-embed-widget-wrapper .tv-embed-widget-wrapper__body {
-    background: #141414 !important;
-    background-color: #141414 !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
 }
 
 .tradingview-widget-container iframe {
-    background-color: #141414 !important;
+    background-color: #FFFFFF !important;
     width: 100% !important;
 }
 
 .custom-chart.tradingview-widget-container iframe {
-    border: 1px solid #30333A;
+    border: 1px solid #FBCFE8;
     border-radius: 8px !important;
     overflow: hidden !important;
 }

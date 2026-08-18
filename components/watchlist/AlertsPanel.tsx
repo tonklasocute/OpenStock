@@ -19,7 +19,7 @@ export default function AlertsPanel({ alerts, onRefresh }: AlertsPanelProps) {
     };
 
     return (
-        <div className="bg-gray-900/30 rounded-lg border border-gray-800 p-4 h-full">
+        <div className="bg-gray-900/30 rounded-lg border border-gray-600 p-4 h-full">
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold text-gray-100 flex items-center">
                     <Bell className="w-5 h-5 mr-2 text-yellow-500" />
@@ -35,7 +35,7 @@ export default function AlertsPanel({ alerts, onRefresh }: AlertsPanelProps) {
                     </div>
                 ) : (
                     alerts.map((alert) => (
-                        <div key={alert._id} className="bg-gray-800/40 rounded-lg p-3 border border-gray-800 relative group">
+                        <div key={alert._id} className="bg-gray-800/40 rounded-lg p-3 border border-gray-600 relative group">
                             <div className="flex justify-between items-start">
                                 <div>
                                     <div className="flex items-center space-x-2">

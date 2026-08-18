@@ -38,7 +38,7 @@ export default function WatchlistManager({ initialItems, userId }: WatchlistMana
 
     return (
         <div className="space-y-6">
-            <div className="bg-gray-900/30 rounded-xl border border-gray-800 p-4 backdrop-blur-sm">
+            <div className="bg-gray-900/30 rounded-xl border border-gray-600 p-4 backdrop-blur-sm">
                 <div className="flex items-center justify-between mb-3">
                     <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider flex items-center">
                         <span className="mr-2">Manage Symbols</span>

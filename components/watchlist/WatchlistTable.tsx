@@ -63,7 +63,7 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
 
     if (!stocks || stocks.length === 0) {
         return (
-            <div className="text-center py-12 bg-gray-900/50 rounded-lg border border-gray-800">
+            <div className="text-center py-12 bg-gray-900/50 rounded-lg border border-gray-600">
                 <h3 className="text-xl font-medium text-gray-300 mb-2">Your watchlist is empty</h3>
                 <p className="text-gray-500 mb-6">Add stocks to track their performance and set alerts.</p>
             </div>

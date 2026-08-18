@@ -88,7 +88,7 @@ export default function CreateAlertModal({
                             value={alertName}
                             onChange={(e) => setAlertName(e.target.value)}
                             placeholder="e.g. Apple at Discount"
-                            className="bg-gray-900 border-gray-700 text-gray-100 placeholder:text-gray-600 focus:border-yellow-500 focus:ring-yellow-500/20 transition-all rounded-md h-10"
+                            className="bg-gray-900 border-gray-700 text-gray-100 placeholder:text-gray-500 focus:border-yellow-500 focus:ring-yellow-500/20 transition-all rounded-md h-10"
                         />
                     </div>
 
@@ -142,7 +142,7 @@ export default function CreateAlertModal({
                                 value={targetPrice}
                                 onChange={(e) => setTargetPrice(e.target.value)}
                                 placeholder="eg: 140"
-                                className="pl-7 bg-gray-900 border-gray-600 text-gray-100 placeholder:text-gray-600 focus:border-yellow-500 focus:ring-yellow-500/20 transition-all rounded-md h-10 font-mono"
+                                className="pl-7 bg-gray-900 border-gray-600 text-gray-100 placeholder:text-gray-500 focus:border-yellow-500 focus:ring-yellow-500/20 transition-all rounded-md h-10 font-mono"
                             />
                         </div>
                     </div>

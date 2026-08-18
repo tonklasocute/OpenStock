@@ -63,15 +63,15 @@ export default function HelpPage() {
 
       {/* FAQs */}
       <div className="space-y-8">
-        <h2 className="text-2xl font-bold text-gray-100 border-b border-gray-800 pb-4">Frequently Asked Questions</h2>
+        <h2 className="text-2xl font-bold text-gray-100 border-b border-gray-600 pb-4">Frequently Asked Questions</h2>
         <div className="grid gap-4">
           {faqs.map((faq, idx) => (
-            <div key={idx} className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:bg-gray-800/50 transition-colors">
+            <div key={idx} className="bg-gray-900/50 border border-gray-600 rounded-xl p-6 hover:bg-gray-800/50 transition-colors">
               <h3 className="font-semibold text-lg text-gray-200 mb-2 flex items-start gap-3">
                 <Lightbulb size={20} className="text-yellow-500/50 mt-1 shrink-0" />
                 {faq.question}
               </h3>
-              <p className="text-gray-400 leading-relaxed ml-8 pl-1 border-l-2 border-gray-800">
+              <p className="text-gray-400 leading-relaxed ml-8 pl-1 border-l-2 border-gray-600">
                 {faq.answer}
               </p>
             </div>
@@ -80,7 +80,7 @@ export default function HelpPage() {
       </div>
 
       {/* Direct Contact */}
-      <div className="mt-20 bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-800 rounded-2xl p-8 text-center">
+      <div className="mt-20 bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-600 rounded-2xl p-8 text-center">
         <h3 className="text-xl font-bold text-gray-100 mb-2">Still stuck?</h3>
         <p className="text-gray-400 mb-6">Our team (and community) answers emails, usually entirely for free.</p>
         {/* TODO: replace with your own contact email before deploying */}
@@ -99,7 +99,7 @@ export default function HelpPage() {
 
 function HelpCard({ icon, title, desc, link, linkText }: any) {
   return (
-    <div className="bg-gray-900 border border-gray-800 p-6 rounded-xl flex flex-col items-start hover:border-gray-700 transition-colors">
+    <div className="bg-gray-900 border border-gray-600 p-6 rounded-xl flex flex-col items-start hover:border-gray-700 transition-colors">
       <div className="mb-4 bg-gray-800 p-2 rounded-lg">{icon}</div>
       <h3 className="font-bold text-gray-100 text-lg mb-2">{title}</h3>
       <p className="text-sm text-gray-400 mb-6 flex-grow">{desc}</p>

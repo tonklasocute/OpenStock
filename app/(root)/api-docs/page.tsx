@@ -237,7 +237,7 @@ function StackItem({ title, desc, url }: any) {
           <h3 className="text-xl font-bold text-gray-200 group-hover:text-teal-400 transition-colors">{title}</h3>
           <p className="text-gray-500 mt-1">{desc}</p>
         </div>
-        <ArrowRight className="text-gray-600 group-hover:text-teal-400 transition-colors" />
+        <ArrowRight className="text-gray-500 group-hover:text-teal-400 transition-colors" />
       </div>
     </Link>
   );
