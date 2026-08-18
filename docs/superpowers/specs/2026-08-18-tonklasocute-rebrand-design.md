@@ -24,6 +24,10 @@ original authors).
 - Remove entirely: the sign-in/sign-up testimonial quote (Ravi Pratap Singh /
   Open Dev Society founder), the "Live on Peerlist Launchpad" badge, and the old
   GitHub repo link on the auth pages.
+- Also remove (found during implementation planning, same category as the above
+  — third-party sponsor promo not applicable to this fork): the "Reliably backed
+  by Siray.ai" banner shown at the top of every page after login
+  (`components/SirayBanner.tsx`).
 - Out of scope: README.md / API_DOCS.md / MARKET_SUPPORT.md (developer-facing
   docs — keep accurate references to the real upstream project; not part of "the
   website").
