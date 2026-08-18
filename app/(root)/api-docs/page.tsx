@@ -17,8 +17,8 @@ import {
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'API & Architecture | OpenStock',
-  description: 'Technical documentation for OpenStock architecture, AI integrations, and background jobs.',
+  title: 'API & Architecture | tonklasocute',
+  description: 'Technical documentation for tonklasocute architecture, AI integrations, and background jobs.',
 };
 
 export default function ApiDocsPage() {
@@ -36,8 +36,8 @@ export default function ApiDocsPage() {
           </div>
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-          OpenStock Architecture
+        <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-100 to-gray-400">
+          tonklasocute Architecture
         </h1>
         <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
           A transparent look at the event-driven, multi-provider system powering your market insights.
@@ -68,7 +68,7 @@ export default function ApiDocsPage() {
                 <Zap size={20} />
               </div>
               <div>
-                <h3 className="text-white font-semibold flex items-center gap-2">
+                <h3 className="text-gray-100 font-semibold flex items-center gap-2">
                   Primary: Google Gemini
                   <span className="text-[10px] bg-teal-500/10 text-teal-400 px-2 py-0.5 rounded-full border border-teal-500/20">Flash Lite 2.5</span>
                 </h3>
@@ -85,7 +85,7 @@ export default function ApiDocsPage() {
                 <ShieldCheck size={20} />
               </div>
               <div>
-                <h3 className="text-white font-semibold flex items-center gap-2">
+                <h3 className="text-gray-100 font-semibold flex items-center gap-2">
                   Fallback: Siray.ai
                   <span className="text-[10px] bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-full border border-blue-500/20">Ultra 1.0</span>
                 </h3>
@@ -98,7 +98,7 @@ export default function ApiDocsPage() {
         </div>
 
         {/* Diagram / Visual */}
-        <div className="bg-[#0A0A0A] border border-gray-800 rounded-xl p-8 flex flex-col justify-center items-center relative overflow-hidden group">
+        <div className="bg-white border border-gray-600 rounded-xl p-8 flex flex-col justify-center items-center relative overflow-hidden group">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-teal-900/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
           {/* Visual Flowchart */}
@@ -110,11 +110,11 @@ export default function ApiDocsPage() {
             <div className="bg-gray-800 p-4 rounded-xl border border-gray-600 w-full flex flex-col gap-3 relative shadow-2xl">
               <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-1 h-12 bg-teal-500 rounded-full" />
               <span className="text-xs font-mono text-teal-500 mb-1">Inngest Function</span>
-              <div className="flex items-center justify-between text-sm text-gray-200 bg-black/40 p-2 rounded border border-gray-700">
+              <div className="flex items-center justify-between text-sm text-gray-200 bg-white/70 p-2 rounded border border-gray-600">
                 <span>Attempt Gemini</span>
                 <CheckCircle2 size={14} className="text-teal-500" />
               </div>
-              <div className="flex items-center justify-between text-sm text-gray-200 bg-blue-900/20 p-2 rounded border border-blue-800/50">
+              <div className="flex items-center justify-between text-sm text-gray-200 bg-blue-100 p-2 rounded border border-blue-300">
                 <span className="flex items-center gap-2">
                   Fallback to Siray
                   <ShieldCheck size={12} className="text-blue-400" />
