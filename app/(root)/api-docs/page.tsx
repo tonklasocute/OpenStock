@@ -2,6 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import {
   Server,
   Cpu,
@@ -26,13 +27,9 @@ export default function ApiDocsPage() {
     <div className="max-w-5xl mx-auto space-y-16 pb-20">
       {/* Hero Section */}
       <section className="text-center space-y-6 pt-10">
-        <div className="flex justify-center items-center gap-4 mb-8">
+        <div className="flex justify-center items-center mb-8">
           <div className="bg-gray-800 p-3 rounded-2xl border border-gray-700 shadow-xl">
-            <img src="/assets/images/logo.png" alt="openstock" className="h-10 w-auto invert brightness-0" />
-          </div>
-          <span className="text-gray-600 text-2xl">+</span>
-          <div className="bg-gray-800 p-3 rounded-2xl border border-gray-700 shadow-xl">
-            <img src="/assets/icons/siray.svg" alt="Siray" className="h-10 w-auto invert brightness-0" />
+            <Logo size={40} showWordmark={false} />
           </div>
         </div>
 
