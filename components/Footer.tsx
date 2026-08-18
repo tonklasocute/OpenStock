@@ -1,6 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
-import OpenDevSocietyBranding from "./OpenDevSocietyBranding";
+import Logo from "@/components/Logo";
 
 const Footer = () => {
     return (
@@ -10,58 +9,11 @@ const Footer = () => {
                     {/* Brand Section */}
                     <div className="col-span-1 md:col-span-2">
                         <Link href="/" className="flex items-center gap-2 mb-4">
-                            <Image
-                                src="/assets/images/logo.png"
-                                alt="OpenStock"
-                                width={150}
-                                height={38}
-                                className="brightness-0 invert"
-                            />
+                            <Logo />
                         </Link>
                         <p className="text-gray-400 mb-6 max-w-md">
-                            OpenStock is an open-source alternative to expensive market platforms. Track real-time prices, set personalized alerts, and explore detailed company insights — built openly, for everyone, forever free.
+                            tonklasocute is a free stock tracking app. Track real-time prices, set personalized alerts, and explore detailed company insights — no paywalls, no subscriptions.
                         </p>
-                        <div className="mb-8">
-                            <Link href="/about" className="text-teal-400 hover:text-teal-300 font-medium inline-flex items-center gap-1 group">
-                                Learn about our mission
-                                <span className="group-hover:translate-x-1 transition-transform">→</span>
-                            </Link>
-                        </div>
-                        <div className="flex space-x-6">
-                            <Link
-                                href="https://github.com/Open-Dev-Society/OpenStock"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-white transition-colors duration-200 relative group"
-                            >
-                                <span className="relative">
-                                    GitHub
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                                </span>
-                            </Link>
-                            <Link
-                                href="https://www.linkedin.com/company/opendevsociety-in/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-blue-400 transition-colors duration-200 relative group"
-                            >
-                                <span className="relative">
-                                    LinkedIn
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
-                                </span>
-                            </Link>
-                            <Link
-                                href="https://discord.gg/JkJ8kfxgxB"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-blue-600 transition-colors duration-200 relative group"
-                            >
-                                <span className="relative">
-                                    Discord
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-                                </span>
-                            </Link>
-                        </div>
                     </div>
 
                     {/* Resources */}
@@ -99,14 +51,18 @@ const Footer = () => {
                 {/* Divider */}
                 <div className="border-t border-gray-800 mt-8 pt-8">
                     <div className="flex flex-col md:flex-row justify-between items-center">
-                        {/* Copyright */}
-                        <div className="text-gray-400 text-sm mb-4 md:mb-0">
-                            © {new Date().getFullYear()} Open Dev Society. All rights reserved.
-                        </div>
-
-                        {/* Open Dev Society Branding */}
-                        <div className="flex items-center space-x-2">
-                            <OpenDevSocietyBranding />
+                        {/* Copyright + AGPL credit */}
+                        <div className="text-gray-400 text-sm">
+                            © {new Date().getFullYear()} tonklasocute · Built with{' '}
+                            <Link
+                                href="https://github.com/Open-Dev-Society/OpenStock"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline hover:text-gray-200"
+                            >
+                                OpenStock
+                            </Link>
+                            {' '}· Open Dev Society
                         </div>
                     </div>
                 </div>
