@@ -75,9 +75,9 @@ export default function CreateAlertModal({
                     {children}
                 </DialogTrigger>
             )}
-            <DialogContent className="sm:max-w-[425px] bg-[#0A0A0A] border-gray-800 text-white shadow-2xl">
+            <DialogContent className="sm:max-w-[425px] bg-white border-gray-600 text-gray-100 shadow-2xl">
                 <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold tracking-tight text-white mb-2">Price Alert</DialogTitle>
+                    <DialogTitle className="text-2xl font-bold tracking-tight text-gray-100 mb-2">Price Alert</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-5 py-2 relative z-10">
 
@@ -88,7 +88,7 @@ export default function CreateAlertModal({
                             value={alertName}
                             onChange={(e) => setAlertName(e.target.value)}
                             placeholder="e.g. Apple at Discount"
-                            className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-600 focus:border-yellow-500 focus:ring-yellow-500/20 transition-all rounded-md h-10"
+                            className="bg-gray-900 border-gray-700 text-gray-100 placeholder:text-gray-600 focus:border-yellow-500 focus:ring-yellow-500/20 transition-all rounded-md h-10"
                         />
                     </div>
 
@@ -99,7 +99,7 @@ export default function CreateAlertModal({
                             <Input
                                 disabled
                                 value={`${companyName || symbol} (${symbol})`}
-                                className="bg-[#1C1C1F] border-none text-gray-500 shadow-inner rounded-md h-10"
+                                className="bg-gray-900 border-none text-gray-500 shadow-inner rounded-md h-10"
                             />
                         </div>
                     </div>
@@ -108,10 +108,10 @@ export default function CreateAlertModal({
                     <div className="grid gap-2">
                         <Label className="text-gray-400 text-sm font-medium">Alert type</Label>
                         <Select disabled defaultValue="price">
-                            <SelectTrigger className="bg-[#1C1C1F] border-gray-800 text-gray-200">
+                            <SelectTrigger className="bg-gray-900 border-gray-600 text-gray-200">
                                 <SelectValue placeholder="Select type" />
                             </SelectTrigger>
-                            <SelectContent className="bg-[#1C1C1F] border-gray-800 text-gray-200">
+                            <SelectContent className="bg-gray-900 border-gray-600 text-gray-200">
                                 <SelectItem value="price">Price</SelectItem>
                             </SelectContent>
                         </Select>
@@ -121,10 +121,10 @@ export default function CreateAlertModal({
                     <div className="grid gap-2">
                         <Label className="text-gray-400 text-sm font-medium">Condition</Label>
                         <Select value={condition} onValueChange={(val: any) => setCondition(val)}>
-                            <SelectTrigger className="bg-[#1C1C1F] border-gray-800 text-gray-200 hover:border-gray-700 transition-colors">
+                            <SelectTrigger className="bg-gray-900 border-gray-600 text-gray-200 hover:border-gray-500 transition-colors">
                                 <SelectValue />
                             </SelectTrigger>
-                            <SelectContent className="bg-[#1C1C1F] border-gray-800 text-gray-200">
+                            <SelectContent className="bg-gray-900 border-gray-600 text-gray-200">
                                 <SelectItem value="ABOVE">Greater than {">"}</SelectItem>
                                 <SelectItem value="BELOW">Less than {"<"}</SelectItem>
                             </SelectContent>
@@ -142,7 +142,7 @@ export default function CreateAlertModal({
                                 value={targetPrice}
                                 onChange={(e) => setTargetPrice(e.target.value)}
                                 placeholder="eg: 140"
-                                className="pl-7 bg-[#1C1C1F] border-gray-800 text-white placeholder:text-gray-600 focus:border-yellow-500 focus:ring-yellow-500/20 transition-all rounded-md h-10 font-mono"
+                                className="pl-7 bg-gray-900 border-gray-600 text-gray-100 placeholder:text-gray-600 focus:border-yellow-500 focus:ring-yellow-500/20 transition-all rounded-md h-10 font-mono"
                             />
                         </div>
                     </div>
