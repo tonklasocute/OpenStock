@@ -21,7 +21,7 @@ export default function AlertsPanel({ alerts, onRefresh }: AlertsPanelProps) {
     return (
         <div className="bg-gray-900/30 rounded-lg border border-gray-800 p-4 h-full">
             <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-white flex items-center">
+                <h2 className="text-lg font-semibold text-gray-100 flex items-center">
                     <Bell className="w-5 h-5 mr-2 text-yellow-500" />
                     Alerts
                 </h2>
@@ -39,11 +39,11 @@ export default function AlertsPanel({ alerts, onRefresh }: AlertsPanelProps) {
                             <div className="flex justify-between items-start">
                                 <div>
                                     <div className="flex items-center space-x-2">
-                                        <div className="w-8 h-8 rounded bg-gray-700 flex items-center justify-center font-bold text-xs text-white">
+                                        <div className="w-8 h-8 rounded bg-gradient-to-br from-teal-400 to-teal-500 flex items-center justify-center font-bold text-xs text-white">
                                             {alert.symbol[0]}
                                         </div>
                                         <div>
-                                            <div className="font-bold text-white text-sm">{alert.symbol}</div>
+                                            <div className="font-bold text-gray-100 text-sm">{alert.symbol}</div>
                                             <div className="text-xs text-gray-400">Target: {formatCurrency(alert.targetPrice)}</div>
                                         </div>
                                     </div>

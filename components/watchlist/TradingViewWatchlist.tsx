@@ -41,7 +41,7 @@ function TradingViewWatchlist({ symbols }: TradingViewWatchlistProps) {
             ],
             "showSymbolLogo": true,
             "isTransparent": true,
-            "colorTheme": "dark", // We can make this dynamic if needed
+            "colorTheme": "light",
             "locale": "en"
         });
 
@@ -49,7 +49,7 @@ function TradingViewWatchlist({ symbols }: TradingViewWatchlistProps) {
     }, [symbols]);
 
     return (
-        <div className="tradingview-widget-container border border-white/10 rounded-xl overflow-hidden shadow-2xl bg-black/40 backdrop-blur-md" ref={container}>
+        <div className="tradingview-widget-container border border-black/10 rounded-xl overflow-hidden shadow-2xl bg-white/70 backdrop-blur-md" ref={container}>
             <div className="tradingview-widget-container__widget"></div>
         </div>
     );

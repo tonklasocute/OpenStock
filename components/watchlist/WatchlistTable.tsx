@@ -71,9 +71,9 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
     }
 
     return (
-        <div className="overflow-hidden rounded-xl border border-white/10 bg-black/40 backdrop-blur-md shadow-xl">
+        <div className="overflow-hidden rounded-xl border border-black/10 bg-white/70 backdrop-blur-md shadow-xl">
             <table className="w-full text-left text-sm border-collapse">
-                <thead className="bg-white/5 text-gray-400 font-medium border-b border-white/10">
+                <thead className="bg-black/5 text-gray-400 font-medium border-b border-black/10">
                     <tr>
                         <th className="px-6 py-4 font-semibold tracking-wide">Company</th>
                         <th className="px-6 py-4 font-semibold tracking-wide">Symbol</th>
@@ -83,15 +83,15 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
                         <th className="px-6 py-4 text-right font-semibold tracking-wide">Actions</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-white/10">
+                <tbody className="divide-y divide-black/10">
                     {stocks.map((stock: any) => {
                         const isPositive = stock.change >= 0;
                         return (
-                            <tr key={stock.symbol} className="hover:bg-white/5 transition-colors group">
+                            <tr key={stock.symbol} className="hover:bg-black/5 transition-colors group">
                                 <td className="px-6 py-4">
                                     <div className="flex items-center space-x-4">
                                         {stock.logo ? (
-                                            <div className="w-10 h-10 relative rounded-full overflow-hidden bg-white/10 shadow-sm border border-white/5">
+                                            <div className="w-10 h-10 relative rounded-full overflow-hidden bg-black/10 shadow-sm border border-black/5">
                                                 <Image
                                                     src={stock.logo}
                                                     alt={stock.symbol}
@@ -100,21 +100,21 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
                                                 />
                                             </div>
                                         ) : (
-                                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center text-xs font-bold text-white shadow-sm border border-white/5">
+                                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-teal-500 flex items-center justify-center text-xs font-bold text-white shadow-sm border border-black/5">
                                                 {stock.symbol[0]}
                                             </div>
                                         )}
                                         <div className="flex flex-col">
-                                            <span className="font-semibold text-white text-base">{stock.name}</span>
+                                            <span className="font-semibold text-gray-100 text-base">{stock.name}</span>
                                         </div>
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 font-medium text-gray-300">
-                                    <span className="bg-white/5 px-2.5 py-1 rounded-md text-xs font-mono border border-white/10">
+                                    <span className="bg-black/5 px-2.5 py-1 rounded-md text-xs font-mono border border-black/10">
                                         {stock.symbol}
                                     </span>
                                 </td>
-                                <td className="px-6 py-4 text-white font-medium text-base tracking-tight">
+                                <td className="px-6 py-4 text-gray-100 font-medium text-base tracking-tight">
                                     {formatCurrency(stock.price)}
                                 </td>
                                 <td className={`px-6 py-4 font-medium`}>
@@ -134,7 +134,7 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
                                             currentPrice={stock.price}
                                             onAlertCreated={onRefresh}
                                         >
-                                            <button className="p-2.5 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all border border-transparent hover:border-white/10" title="Add Alert">
+                                            <button className="p-2.5 rounded-full text-gray-400 hover:text-gray-100 hover:bg-black/10 transition-all border border-transparent hover:border-black/10" title="Add Alert">
                                                 <Bell className="w-4.5 h-4.5" />
                                             </button>
                                         </CreateAlertModal>

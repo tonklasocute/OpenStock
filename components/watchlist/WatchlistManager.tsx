@@ -50,7 +50,7 @@ export default function WatchlistManager({ initialItems, userId }: WatchlistMana
                         variant="ghost"
                         size="sm"
                         onClick={toggleSort}
-                        className="h-8 px-2 text-gray-400 hover:text-white hover:bg-white/10"
+                        className="h-8 px-2 text-gray-400 hover:text-gray-100 hover:bg-black/10"
                         title={
                             sortOrder === 'asc'
                                 ? 'Sorted A-Z'
