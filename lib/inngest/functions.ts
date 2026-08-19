@@ -260,7 +260,12 @@ export const checkStockAlerts = inngest.createFunction(
             const currentPrice = prices[alert.symbol];
             if (!currentPrice) continue;
 
-            const outcome = evaluateAlertState(alert.condition, alert.targetPrice, currentPrice, alert.armed);
+            // `.lean()` reads skip Mongoose schema defaults, so a legacy document
+            // written without an `armed` field comes back as `undefined` here —
+            // treat anything other than an explicit `false` as armed, matching
+            // the schema's own default.
+            const isArmed = alert.armed !== false;
+            const outcome = evaluateAlertState(alert.condition, alert.targetPrice, currentPrice, isArmed);
             if (outcome === 'fire') {
                 toFire.push({ alert, currentPrice });
             } else if (outcome === 'rearm') {
