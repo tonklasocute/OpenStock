@@ -274,8 +274,8 @@ export const checkStockAlerts = inngest.createFunction(
             await step.run('process-triggered-alerts', async () => {
                 const { connectToDatabase } = await import("@/database/mongoose");
                 const { Alert } = await import("@/database/models/alert.model");
-                // In a real app we would import 'kit' here and use kit.sendBroadcast or similar
-                // For now, we just log it as the critical logic is the detection
+                const { LineLink } = await import("@/database/models/lineLink.model");
+                const { pushMessage } = await import("@/lib/line/client");
                 await connectToDatabase();
 
                 for (const { alert, currentPrice } of triggeredAlerts) {
@@ -283,6 +283,16 @@ export const checkStockAlerts = inngest.createFunction(
 
                     // Mark triggered
                     await Alert.findByIdAndUpdate(alert._id, { triggered: true, active: false });
+
+                    // Notify via LINE if the user has linked their account
+                    const lineLink = await LineLink.findOne({ userId: alert.userId });
+                    if (lineLink?.lineUserId) {
+                        const conditionText = alert.condition === 'ABOVE' ? 'สูงกว่า' : 'ต่ำกว่า';
+                        await pushMessage(
+                            lineLink.lineUserId,
+                            `🔔 ${alert.symbol} ถึงราคาที่ตั้งไว้แล้ว\nเงื่อนไข: ราคา${conditionText} $${alert.targetPrice}\nราคาปัจจุบัน: $${currentPrice}`
+                        );
+                    }
                 }
             });
         }
