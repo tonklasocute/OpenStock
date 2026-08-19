@@ -495,41 +495,46 @@ export const sendDailyLineDigest = inngest.createFunction(
         let skipped = 0;
 
         for (const link of linkedUsers as any[]) {
-            await step.run(`send-digest-${link.userId}`, async () => {
-                const { getUserWatchlist } = await import("@/lib/actions/watchlist.actions");
-                const { getWatchlistData, getNews } = await import("@/lib/actions/finnhub.actions");
-                const { pushMessage } = await import("@/lib/line/client");
+            try {
+                await step.run(`send-digest-${link.userId}`, async () => {
+                    const { getUserWatchlist } = await import("@/lib/actions/watchlist.actions");
+                    const { getWatchlistData, getNews } = await import("@/lib/actions/finnhub.actions");
+                    const { pushMessage } = await import("@/lib/line/client");
 
-                const watchlist = await getUserWatchlist(link.userId);
-                const symbols = watchlist.map((item: any) => item.symbol);
+                    const watchlist = await getUserWatchlist(link.userId);
+                    const symbols = watchlist.map((item: any) => item.symbol);
 
-                if (symbols.length === 0) {
-                    skipped++;
-                    return;
-                }
+                    if (symbols.length === 0) {
+                        skipped++;
+                        return;
+                    }
 
-                const [priceData, news] = await Promise.all([
-                    getWatchlistData(symbols),
-                    getNews(symbols).catch(() => []),
-                ]);
+                    const [priceData, news] = await Promise.all([
+                        getWatchlistData(symbols),
+                        getNews(symbols).catch(() => []),
+                    ]);
 
-                const priceLines = priceData
-                    .slice(0, 10)
-                    .map((item: any) => `${item.symbol}: $${item.price.toFixed(2)} (${item.changePercent >= 0 ? '+' : ''}${item.changePercent.toFixed(2)}%)`)
-                    .join('\n');
+                    const priceLines = priceData
+                        .slice(0, 10)
+                        .map((item: any) => `${item.symbol}: $${item.price.toFixed(2)} (${item.changePercent >= 0 ? '+' : ''}${item.changePercent.toFixed(2)}%)`)
+                        .join('\n');
 
-                const newsLines = news
-                    .slice(0, 5)
-                    .map((article: any) => `• ${article.headline}`)
-                    .join('\n');
+                    const newsLines = news
+                        .slice(0, 5)
+                        .map((article: any) => `• ${article.headline}`)
+                        .join('\n');
 
-                const extraCount = priceData.length > 10 ? `\n...และอีก ${priceData.length - 10} ตัว` : '';
+                    const extraCount = priceData.length > 10 ? `\n...และอีก ${priceData.length - 10} ตัว` : '';
 
-                const text = `📊 สรุป Watchlist ประจำวัน\n\n${priceLines}${extraCount}\n\n📰 ข่าวที่เกี่ยวข้อง\n${newsLines || 'ไม่มีข่าวใหม่วันนี้'}`;
+                    const text = `📊 สรุป Watchlist ประจำวัน\n\n${priceLines}${extraCount}\n\n📰 ข่าวที่เกี่ยวข้อง\n${newsLines || 'ไม่มีข่าวใหม่วันนี้'}`;
 
-                sent++;
-                await pushMessage(link.lineUserId, text);
-            });
+                    await pushMessage(link.lineUserId, text);
+                    sent++;
+                });
+            } catch (e) {
+                console.error(`Failed to send LINE digest to user ${link.userId}`, e);
+                skipped++;
+            }
         }
 
         return { linkedUsers: linkedUsers.length, sent, skipped };
