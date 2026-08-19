@@ -72,3 +72,71 @@ describe('pushMessage', () => {
         expect(result).toEqual({ status: 'failed' });
     });
 });
+
+describe('splitMessage', () => {
+    it('returns the text unchanged in a single-element array when under the limit', async () => {
+        const { splitMessage } = await import('@/lib/line/client');
+
+        expect(splitMessage('short text')).toEqual(['short text']);
+    });
+
+    it('splits on the nearest newline before the limit, not mid-line', async () => {
+        const { splitMessage } = await import('@/lib/line/client');
+
+        const line = 'A'.repeat(10);
+        const text = Array(500).fill(line).join('\n'); // ~5499 chars, well past a small limit
+
+        const chunks = splitMessage(text, 100);
+
+        expect(chunks.length).toBeGreaterThan(1);
+        for (const chunk of chunks) {
+            expect(chunk.length).toBeLessThanOrEqual(100);
+            // every chunk boundary lands on a full line, never mid-"AAAAAAAAAA"
+            for (const part of chunk.split('\n')) {
+                expect(part === '' || part === line).toBe(true);
+            }
+        }
+        expect(chunks.join('\n')).toBe(text);
+    });
+
+    it('falls back to a hard split when a single line exceeds the limit', async () => {
+        const { splitMessage } = await import('@/lib/line/client');
+
+        const text = 'B'.repeat(250);
+        const chunks = splitMessage(text, 100);
+
+        expect(chunks).toEqual(['B'.repeat(100), 'B'.repeat(100), 'B'.repeat(50)]);
+    });
+});
+
+describe('pushMessages', () => {
+    it('sends multiple text messages in one push call', async () => {
+        process.env.LINE_CHANNEL_ACCESS_TOKEN = 'test-token';
+        process.env.LINE_CHANNEL_SECRET = 'test-secret';
+        const { pushMessages } = await import('@/lib/line/client');
+
+        const fetchSpy = vi.spyOn(global, 'fetch').mockResolvedValue(new Response(null, { status: 200 }));
+
+        const result = await pushMessages('U123', ['part one', 'part two']);
+
+        expect(result).toEqual({ status: 'sent' });
+        const body = JSON.parse((fetchSpy.mock.calls[0][1] as RequestInit).body as string);
+        expect(body.messages).toEqual([
+            { type: 'text', text: 'part one' },
+            { type: 'text', text: 'part two' },
+        ]);
+    });
+
+    it('caps at 5 messages per push call, per LINE limits', async () => {
+        process.env.LINE_CHANNEL_ACCESS_TOKEN = 'test-token';
+        process.env.LINE_CHANNEL_SECRET = 'test-secret';
+        const { pushMessages } = await import('@/lib/line/client');
+
+        const fetchSpy = vi.spyOn(global, 'fetch').mockResolvedValue(new Response(null, { status: 200 }));
+
+        await pushMessages('U123', ['1', '2', '3', '4', '5', '6', '7']);
+
+        const body = JSON.parse((fetchSpy.mock.calls[0][1] as RequestInit).body as string);
+        expect(body.messages).toHaveLength(5);
+    });
+});

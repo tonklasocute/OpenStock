@@ -498,7 +498,7 @@ export const sendDailyLineDigest = inngest.createFunction(
                 const outcome = await step.run(`send-digest-${link.userId}`, async () => {
                     const { getUserWatchlist } = await import("@/lib/actions/watchlist.actions");
                     const { getWatchlistData, getNews } = await import("@/lib/actions/finnhub.actions");
-                    const { pushMessage } = await import("@/lib/line/client");
+                    const { splitMessage, pushMessages } = await import("@/lib/line/client");
 
                     const watchlist = await getUserWatchlist(link.userId);
                     const symbols = watchlist.map((item: any) => item.symbol);
@@ -523,7 +523,7 @@ export const sendDailyLineDigest = inngest.createFunction(
 
                     const text = `📊 สรุป Watchlist ประจำวัน\n\n${priceLines}\n\n📰 ข่าวที่เกี่ยวข้อง\n${newsLines || 'ไม่มีข่าวใหม่วันนี้'}`;
 
-                    const result = await pushMessage(link.lineUserId, text);
+                    const result = await pushMessages(link.lineUserId, splitMessage(text));
                     return result.status; // 'sent' | 'failed'
                 });
                 outcomes.push(outcome);
