@@ -283,6 +283,11 @@ NODEMAILER_EMAIL=youraddress@gmail.com
 NODEMAILER_PASSWORD=your_gmail_app_password
 ```
 
+After creating your LINE Official Account + Messaging API channel at the LINE Developers console:
+
+1. Set the webhook URL to `https://<your-domain>/api/line/webhook` and toggle **Use webhook** on.
+2. Turn **off** auto-reply and greeting messages in the LINE Official Account Manager, so they don't fire alongside (or instead of) the app's own linking confirmation reply.
+
 Local (Docker Compose) MongoDB:
 ```env
 # Core
@@ -330,6 +335,11 @@ NEXT_PUBLIC_LINE_OA_ID=@your_line_oa_id
 NODEMAILER_EMAIL=youraddress@gmail.com
 NODEMAILER_PASSWORD=your_gmail_app_password
 ```
+
+After creating your LINE Official Account + Messaging API channel at the LINE Developers console:
+
+1. Set the webhook URL to `https://<your-domain>/api/line/webhook` and toggle **Use webhook** on.
+2. Turn **off** auto-reply and greeting messages in the LINE Official Account Manager, so they don't fire alongside (or instead of) the app's own linking confirmation reply.
 
 Notes
 - Keep private keys server-side whenever possible.

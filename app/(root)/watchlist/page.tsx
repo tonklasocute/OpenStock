@@ -28,7 +28,7 @@ export default async function WatchlistPage() {
         getUserWatchlist(userId),
         getUserAlerts(userId),
         getNews(), // Initial news fetch
-        getLineLinkStatus(userId)
+        getLineLinkStatus()
     ]);
 
     const watchlistSymbols = watchlistItems.map((item: any) => item.symbol);

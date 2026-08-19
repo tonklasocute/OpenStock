@@ -41,11 +41,12 @@ describe('POST /api/line/webhook', () => {
         vi.mocked(verifySignature).mockReturnValue(true);
 
         const save = vi.fn();
-        vi.mocked(LineLink.findOne).mockResolvedValue({
+        const mockLink: any = {
             linkCode: '123456',
             linkCodeExpiresAt: new Date(Date.now() + 60_000),
             save,
-        } as any);
+        };
+        vi.mocked(LineLink.findOne).mockResolvedValue(mockLink);
 
         const { POST } = await import('@/app/api/line/webhook/route');
         const request = new NextRequest('http://localhost/api/line/webhook', {
@@ -66,6 +67,12 @@ describe('POST /api/line/webhook', () => {
         const response = await POST(request);
 
         expect(response.status).toBe(200);
+        expect(LineLink.findOne).toHaveBeenCalledWith({
+            linkCode: '123456',
+            linkCodeExpiresAt: { $gt: expect.any(Date) },
+        });
+        expect(mockLink.lineUserId).toBe('U123');
+        expect(mockLink.linkCode).toBeNull();
         expect(save).toHaveBeenCalled();
         expect(replyMessage).toHaveBeenCalledWith('reply-token', expect.any(String));
     });

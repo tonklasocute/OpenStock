@@ -18,7 +18,7 @@ export default function ConnectLineCard({ userId, initiallyConnected }: ConnectL
     const handleGenerate = async () => {
         setLoading(true);
         try {
-            const result = await generateLinkCode(userId);
+            const result = await generateLinkCode();
             setCode(result.linkCode);
         } catch {
             setCode(null);
@@ -28,7 +28,7 @@ export default function ConnectLineCard({ userId, initiallyConnected }: ConnectL
     };
 
     const handleRefreshStatus = async () => {
-        const status = await getLineLinkStatus(userId);
+        const status = await getLineLinkStatus();
         setConnected(status.connected);
     };
 

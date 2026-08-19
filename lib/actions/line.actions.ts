@@ -1,5 +1,7 @@
 'use server';
 
+import { auth } from '@/lib/better-auth/auth';
+import { headers } from 'next/headers';
 import { connectToDatabase } from '@/database/mongoose';
 import { LineLink } from '@/database/models/lineLink.model';
 
@@ -7,8 +9,17 @@ function generateSixDigitCode(): string {
     return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
-export async function generateLinkCode(userId: string) {
+async function requireUserId(): Promise<string> {
+    const session = await auth.api.getSession({ headers: await headers() });
+    if (!session) {
+        throw new Error('Unauthorized');
+    }
+    return session.user.id;
+}
+
+export async function generateLinkCode() {
     try {
+        const userId = await requireUserId();
         await connectToDatabase();
         const linkCode = generateSixDigitCode();
         const linkCodeExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
@@ -26,8 +37,9 @@ export async function generateLinkCode(userId: string) {
     }
 }
 
-export async function getLineLinkStatus(userId: string) {
+export async function getLineLinkStatus() {
     try {
+        const userId = await requireUserId();
         await connectToDatabase();
         const link = await LineLink.findOne({ userId });
         return { connected: Boolean(link?.lineUserId) };

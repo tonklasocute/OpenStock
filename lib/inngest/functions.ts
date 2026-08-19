@@ -491,12 +491,11 @@ export const sendDailyLineDigest = inngest.createFunction(
             return { message: 'No LINE-linked users to notify.' };
         }
 
-        let sent = 0;
-        let skipped = 0;
+        const outcomes: string[] = [];
 
         for (const link of linkedUsers as any[]) {
             try {
-                await step.run(`send-digest-${link.userId}`, async () => {
+                const outcome = await step.run(`send-digest-${link.userId}`, async () => {
                     const { getUserWatchlist } = await import("@/lib/actions/watchlist.actions");
                     const { getWatchlistData, getNews } = await import("@/lib/actions/finnhub.actions");
                     const { pushMessage } = await import("@/lib/line/client");
@@ -505,8 +504,7 @@ export const sendDailyLineDigest = inngest.createFunction(
                     const symbols = watchlist.map((item: any) => item.symbol);
 
                     if (symbols.length === 0) {
-                        skipped++;
-                        return;
+                        return 'skipped';
                     }
 
                     const [priceData, news] = await Promise.all([
@@ -528,15 +526,20 @@ export const sendDailyLineDigest = inngest.createFunction(
 
                     const text = `📊 สรุป Watchlist ประจำวัน\n\n${priceLines}${extraCount}\n\n📰 ข่าวที่เกี่ยวข้อง\n${newsLines || 'ไม่มีข่าวใหม่วันนี้'}`;
 
-                    await pushMessage(link.lineUserId, text);
-                    sent++;
+                    const result = await pushMessage(link.lineUserId, text);
+                    return result.status; // 'sent' | 'failed'
                 });
+                outcomes.push(outcome);
             } catch (e) {
                 console.error(`Failed to send LINE digest to user ${link.userId}`, e);
-                skipped++;
+                outcomes.push('failed');
             }
         }
 
-        return { linkedUsers: linkedUsers.length, sent, skipped };
+        const sent = outcomes.filter((o) => o === 'sent').length;
+        const skipped = outcomes.filter((o) => o === 'skipped').length;
+        const failed = outcomes.filter((o) => o === 'failed').length;
+
+        return { linkedUsers: linkedUsers.length, sent, skipped, failed };
     }
 );
