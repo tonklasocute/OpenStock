@@ -7,9 +7,13 @@ export function evaluateAlertState(
     condition: AlertCondition,
     targetPrice: number,
     currentPrice: number,
-    armed: boolean
+    // `.lean()` reads skip Mongoose schema defaults, so a legacy alert
+    // document (or one inserted outside Mongoose) comes back with `armed`
+    // as `undefined` rather than the schema's default of `true` — treat
+    // anything but an explicit `false` as armed.
+    armed: boolean | undefined
 ): AlertOutcome {
-    if (armed) {
+    if (armed !== false) {
         const fireConditionMet =
             condition === 'ABOVE' ? currentPrice >= targetPrice : currentPrice <= targetPrice;
         return fireConditionMet ? 'fire' : 'none';

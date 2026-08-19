@@ -49,4 +49,16 @@ describe('evaluateAlertState', () => {
             expect(evaluateAlertState('BELOW', 100, 102, false)).toBe('none');
         });
     });
+
+    describe('undefined armed (legacy documents read via .lean())', () => {
+        it('treats undefined as armed and fires when the condition is met', () => {
+            expect(evaluateAlertState('BELOW', 100, 95, undefined)).toBe('fire');
+            expect(evaluateAlertState('ABOVE', 100, 105, undefined)).toBe('fire');
+        });
+
+        it('treats undefined as armed and does not fire when the condition is not met', () => {
+            expect(evaluateAlertState('BELOW', 100, 101, undefined)).toBe('none');
+            expect(evaluateAlertState('ABOVE', 100, 99, undefined)).toBe('none');
+        });
+    });
 });
