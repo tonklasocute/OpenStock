@@ -271,6 +271,13 @@ GEMINI_API_KEY=your_gemini_api_key
 # Get this from your Inngest dashboard: https://app.inngest.com/env/settings/keys
 INNGEST_SIGNING_KEY=your_inngest_signing_key
 
+# LINE Messaging API (optional; enables price-alert and daily digest notifications)
+# Create a LINE Official Account + Messaging API channel at https://developers.line.biz/console/
+LINE_CHANNEL_ACCESS_TOKEN=your_line_channel_access_token
+LINE_CHANNEL_SECRET=your_line_channel_secret
+# Public — used client-side to build the "add friend" link, e.g. @abc1234
+NEXT_PUBLIC_LINE_OA_ID=@your_line_oa_id
+
 # Email (Nodemailer via Gmail; consider App Passwords if 2FA)
 NODEMAILER_EMAIL=youraddress@gmail.com
 NODEMAILER_PASSWORD=your_gmail_app_password
@@ -311,6 +318,13 @@ GEMINI_API_KEY=your_gemini_api_key
 # Inngest Signing Key (required for Vercel deployment)
 # Get this from your Inngest dashboard: https://app.inngest.com/env/settings/keys
 INNGEST_SIGNING_KEY=your_inngest_signing_key
+
+# LINE Messaging API (optional; enables price-alert and daily digest notifications)
+# Create a LINE Official Account + Messaging API channel at https://developers.line.biz/console/
+LINE_CHANNEL_ACCESS_TOKEN=your_line_channel_access_token
+LINE_CHANNEL_SECRET=your_line_channel_secret
+# Public — used client-side to build the "add friend" link, e.g. @abc1234
+NEXT_PUBLIC_LINE_OA_ID=@your_line_oa_id
 
 # Email (Nodemailer via Gmail; consider App Passwords if 2FA)
 NODEMAILER_EMAIL=youraddress@gmail.com
