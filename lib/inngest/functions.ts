@@ -475,3 +475,63 @@ export const checkInactiveUsers = inngest.createFunction(
         return { processed: inactiveUsers.length, sent: results };
     }
 );
+
+export const sendDailyLineDigest = inngest.createFunction(
+    { id: 'send-daily-line-digest', triggers: [{ cron: '0 1 * * *' }] }, // 01:00 UTC = 08:00 Thailand
+    async ({ step }) => {
+        const linkedUsers = await step.run('fetch-linked-users', async () => {
+            const { connectToDatabase } = await import("@/database/mongoose");
+            const { LineLink } = await import("@/database/models/lineLink.model");
+
+            await connectToDatabase();
+            return await LineLink.find({ lineUserId: { $ne: null } }).lean();
+        });
+
+        if (!linkedUsers || linkedUsers.length === 0) {
+            return { message: 'No LINE-linked users to notify.' };
+        }
+
+        let sent = 0;
+        let skipped = 0;
+
+        for (const link of linkedUsers as any[]) {
+            await step.run(`send-digest-${link.userId}`, async () => {
+                const { getUserWatchlist } = await import("@/lib/actions/watchlist.actions");
+                const { getWatchlistData, getNews } = await import("@/lib/actions/finnhub.actions");
+                const { pushMessage } = await import("@/lib/line/client");
+
+                const watchlist = await getUserWatchlist(link.userId);
+                const symbols = watchlist.map((item: any) => item.symbol);
+
+                if (symbols.length === 0) {
+                    skipped++;
+                    return;
+                }
+
+                const [priceData, news] = await Promise.all([
+                    getWatchlistData(symbols),
+                    getNews(symbols).catch(() => []),
+                ]);
+
+                const priceLines = priceData
+                    .slice(0, 10)
+                    .map((item: any) => `${item.symbol}: $${item.price.toFixed(2)} (${item.changePercent >= 0 ? '+' : ''}${item.changePercent.toFixed(2)}%)`)
+                    .join('\n');
+
+                const newsLines = news
+                    .slice(0, 5)
+                    .map((article: any) => `• ${article.headline}`)
+                    .join('\n');
+
+                const extraCount = priceData.length > 10 ? `\n...และอีก ${priceData.length - 10} ตัว` : '';
+
+                const text = `📊 สรุป Watchlist ประจำวัน\n\n${priceLines}${extraCount}\n\n📰 ข่าวที่เกี่ยวข้อง\n${newsLines || 'ไม่มีข่าวใหม่วันนี้'}`;
+
+                sent++;
+                await pushMessage(link.lineUserId, text);
+            });
+        }
+
+        return { linkedUsers: linkedUsers.length, sent, skipped };
+    }
+);
