@@ -513,7 +513,6 @@ export const sendDailyLineDigest = inngest.createFunction(
                     ]);
 
                     const priceLines = priceData
-                        .slice(0, 10)
                         .map((item: any) => `${item.symbol}: $${item.price.toFixed(2)} (${item.changePercent >= 0 ? '+' : ''}${item.changePercent.toFixed(2)}%)`)
                         .join('\n');
 
@@ -522,9 +521,7 @@ export const sendDailyLineDigest = inngest.createFunction(
                         .map((article: any) => `• ${article.headline}`)
                         .join('\n');
 
-                    const extraCount = priceData.length > 10 ? `\n...และอีก ${priceData.length - 10} ตัว` : '';
-
-                    const text = `📊 สรุป Watchlist ประจำวัน\n\n${priceLines}${extraCount}\n\n📰 ข่าวที่เกี่ยวข้อง\n${newsLines || 'ไม่มีข่าวใหม่วันนี้'}`;
+                    const text = `📊 สรุป Watchlist ประจำวัน\n\n${priceLines}\n\n📰 ข่าวที่เกี่ยวข้อง\n${newsLines || 'ไม่มีข่าวใหม่วันนี้'}`;
 
                     const result = await pushMessage(link.lineUserId, text);
                     return result.status; // 'sent' | 'failed'
