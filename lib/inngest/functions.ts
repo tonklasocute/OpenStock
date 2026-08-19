@@ -6,6 +6,7 @@ import { getWatchlistSymbolsByEmail } from "@/lib/actions/watchlist.actions";
 import { getNews } from "@/lib/actions/finnhub.actions";
 import { getFormattedTodayDate } from "@/lib/utils";
 import { callAIProviderWithFallback } from "@/lib/ai-provider";
+import { evaluateAlertState } from "@/lib/alerts/evaluate";
 
 const APP_URL = process.env.BETTER_AUTH_URL || 'https://tonklasocute.com';
 
@@ -220,7 +221,6 @@ export const checkStockAlerts = inngest.createFunction(
 
             return await Alert.find({
                 active: true,
-                triggered: false,
                 expiresAt: { $gt: now }
             }).lean();
         });
@@ -252,40 +252,35 @@ export const checkStockAlerts = inngest.createFunction(
         });
 
         // Step 4: Check conditions
-        type TriggeredAlert = { alert: any; currentPrice: number };
-        const triggeredAlerts: TriggeredAlert[] = [];
+        type EvaluatedAlert = { alert: any; currentPrice: number };
+        const toFire: EvaluatedAlert[] = [];
+        const toRearm: EvaluatedAlert[] = [];
 
         for (const alert of activeAlerts as any[]) {
             const currentPrice = prices[alert.symbol];
             if (!currentPrice) continue;
 
-            let isTriggered = false;
-            // Simple check
-            if (alert.condition === 'ABOVE' && currentPrice >= alert.targetPrice) {
-                isTriggered = true;
-            } else if (alert.condition === 'BELOW' && currentPrice <= alert.targetPrice) {
-                isTriggered = true;
-            }
-
-            if (isTriggered) {
-                triggeredAlerts.push({ alert, currentPrice });
+            const outcome = evaluateAlertState(alert.condition, alert.targetPrice, currentPrice, alert.armed);
+            if (outcome === 'fire') {
+                toFire.push({ alert, currentPrice });
+            } else if (outcome === 'rearm') {
+                toRearm.push({ alert, currentPrice });
             }
         }
 
-        // Step 5: Process triggers
-        if (triggeredAlerts.length > 0) {
-            await step.run('process-triggered-alerts', async () => {
+        // Step 5: Process fires and rearms
+        if (toFire.length > 0 || toRearm.length > 0) {
+            await step.run('process-alert-state-changes', async () => {
                 const { connectToDatabase } = await import("@/database/mongoose");
                 const { Alert } = await import("@/database/models/alert.model");
                 const { LineLink } = await import("@/database/models/lineLink.model");
                 const { pushMessage } = await import("@/lib/line/client");
                 await connectToDatabase();
 
-                for (const { alert, currentPrice } of triggeredAlerts) {
+                for (const { alert, currentPrice } of toFire) {
                     console.log(`🚀 ALERT FIRED: ${alert.symbol} is ${currentPrice} (${alert.condition} ${alert.targetPrice})`);
 
-                    // Mark triggered
-                    await Alert.findByIdAndUpdate(alert._id, { triggered: true, active: false });
+                    await Alert.findByIdAndUpdate(alert._id, { triggered: true, armed: false });
 
                     // Notify via LINE if the user has linked their account
                     const lineLink = await LineLink.findOne({ userId: alert.userId });
@@ -297,12 +292,18 @@ export const checkStockAlerts = inngest.createFunction(
                         );
                     }
                 }
+
+                for (const { alert } of toRearm) {
+                    console.log(`🔄 ALERT REARMED: ${alert.symbol} (${alert.condition} ${alert.targetPrice})`);
+                    await Alert.findByIdAndUpdate(alert._id, { armed: true });
+                }
             });
         }
 
         return {
             processed: activeAlerts.length,
-            triggered: triggeredAlerts.length
+            fired: toFire.length,
+            rearmed: toRearm.length
         };
     }
 );
