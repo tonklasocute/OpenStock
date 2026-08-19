@@ -10,7 +10,8 @@ import { callAIProviderWithFallback } from "@/lib/ai-provider";
 const APP_URL = process.env.BETTER_AUTH_URL || 'https://tonklasocute.com';
 
 export const sendSignUpEmail = inngest.createFunction(
-    { id: 'sign-up-email', triggers: [{ event: 'app/user.created' }] },
+    { id: 'sign-up-email' },
+    { event: 'app/user.created' },
     async ({ event, step }) => {
         const userProfile = `
             - Country: ${event.data.country}
@@ -56,7 +57,8 @@ export const sendSignUpEmail = inngest.createFunction(
 
 // Rename to Weekly
 export const sendWeeklyNewsSummary = inngest.createFunction(
-    { id: 'weekly-news-summary', triggers: [{ event: 'app/send.weekly.news' }, { cron: '0 9 * * 1' }] }, // Every Monday at 9AM
+    { id: 'weekly-news-summary' }, // Every Monday at 9AM
+    [{ event: 'app/send.weekly.news' }, { cron: '0 9 * * 1' }],
     async ({ step }) => {
         // Step 1: Fetch General Market News
         const articles = await step.run('fetch-general-news', async () => {
@@ -204,7 +206,8 @@ export const sendWeeklyNewsSummary = inngest.createFunction(
 )
 
 export const checkStockAlerts = inngest.createFunction(
-    { id: 'check-stock-alerts', triggers: [{ cron: '*/5 * * * *' }] }, // Run every 5 minutes
+    { id: 'check-stock-alerts' }, // Run every 5 minutes
+    { cron: '*/5 * * * *' },
     async ({ step }) => {
         // Step 1: Fetch active alerts
         const activeAlerts = await step.run('fetch-active-alerts', async () => {
@@ -305,7 +308,8 @@ export const checkStockAlerts = inngest.createFunction(
 );
 
 export const checkInactiveUsers = inngest.createFunction(
-    { id: 'check-inactive-users', triggers: [{ cron: '0 10 * * *' }] }, // Run every day at 10 AM
+    { id: 'check-inactive-users' }, // Run every day at 10 AM
+    { cron: '0 10 * * *' },
     async ({ step }) => {
         // Step 1: Fetch Inactive Users
         const inactiveUsers = await step.run('fetch-inactive-users', async () => {
@@ -477,7 +481,8 @@ export const checkInactiveUsers = inngest.createFunction(
 );
 
 export const sendDailyLineDigest = inngest.createFunction(
-    { id: 'send-daily-line-digest', triggers: [{ cron: '0 1 * * *' }] }, // 01:00 UTC = 08:00 Thailand
+    { id: 'send-daily-line-digest' }, // 01:00 UTC = 08:00 Thailand
+    { cron: '0 1 * * *' },
     async ({ step }) => {
         const linkedUsers = await step.run('fetch-linked-users', async () => {
             const { connectToDatabase } = await import("@/database/mongoose");
