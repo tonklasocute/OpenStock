@@ -4,13 +4,16 @@ import React from "react";
 import { Trash2, TrendingUp, Bell } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 import { deleteAlert } from "@/lib/actions/alert.actions";
+import ConnectLineCard from "./ConnectLineCard";
 
 interface AlertsPanelProps {
     alerts: any[];
+    userId: string;
+    lineConnected: boolean;
     onRefresh?: () => void;
 }
 
-export default function AlertsPanel({ alerts, onRefresh }: AlertsPanelProps) {
+export default function AlertsPanel({ alerts, userId, lineConnected, onRefresh }: AlertsPanelProps) {
     const handleDelete = async (id: string) => {
         if (confirm("Are you sure you want to delete this alert?")) {
             await deleteAlert(id);
@@ -27,6 +30,8 @@ export default function AlertsPanel({ alerts, onRefresh }: AlertsPanelProps) {
                 </h2>
                 {/* <button className="text-sm text-yellow-500 hover:underline">Create Alert</button> */}
             </div>
+
+            <ConnectLineCard userId={userId} initiallyConnected={lineConnected} />
 
             <div className="space-y-3">
                 {alerts.length === 0 ? (

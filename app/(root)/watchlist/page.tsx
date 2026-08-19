@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { getUserWatchlist } from '@/lib/actions/watchlist.actions';
 import { getUserAlerts } from '@/lib/actions/alert.actions';
 import { getNews } from '@/lib/actions/finnhub.actions';
+import { getLineLinkStatus } from '@/lib/actions/line.actions';
 import WatchlistManager from '@/components/watchlist/WatchlistManager';
 import AlertsPanel from '@/components/watchlist/AlertsPanel';
 import NewsGrid from '@/components/watchlist/NewsGrid';
@@ -23,10 +24,11 @@ export default async function WatchlistPage() {
     const userId = session.user.id;
 
     // Parallel data fetching
-    const [watchlistItems, alerts, news] = await Promise.all([
+    const [watchlistItems, alerts, news, lineStatus] = await Promise.all([
         getUserWatchlist(userId),
         getUserAlerts(userId),
-        getNews() // Initial news fetch
+        getNews(), // Initial news fetch
+        getLineLinkStatus(userId)
     ]);
 
     const watchlistSymbols = watchlistItems.map((item: any) => item.symbol);
@@ -64,7 +66,7 @@ export default async function WatchlistPage() {
 
                 {/* Sidebar - Alerts */}
                 <div className="lg:col-span-1">
-                    <AlertsPanel alerts={alerts} />
+                    <AlertsPanel alerts={alerts} userId={userId} lineConnected={lineStatus.connected} />
                 </div>
             </div>
         </div>
