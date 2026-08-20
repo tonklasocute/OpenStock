@@ -187,10 +187,10 @@
         @apply cursor-pointer px-3 py-1.5 w-fit flex items-center gap-1.5 text-sm bg-teal-500 hover:bg-teal-600 text-gray-900 font-extrabold rounded-none;
     }
     .search-dialog {
-        @apply !bg-gray-800 lg:min-w-[800px] border-gray-600 fixed top-10 left-1/2 -translate-x-1/2 translate-y-10;
+        @apply !bg-gray-800 lg:min-w-[800px] border-2 border-gray-600 rounded-none fixed top-10 left-1/2 -translate-x-1/2 translate-y-10;
     }
     .search-field {
-        @apply !bg-gray-800 border-b border-gray-600 relative;
+        @apply !bg-gray-800 border-b-2 border-gray-600 relative;
     }
     .search-list {
         @apply !bg-gray-800 max-h-[400px];
@@ -202,22 +202,22 @@
         @apply py-6 !bg-transparent text-center text-gray-500;
     }
     .search-input {
-        @apply !bg-gray-800 border-0 text-gray-400 placeholder:text-gray-500 focus:ring-0 text-base h-14 pr-10;
+        @apply !bg-gray-800 border-0 text-gray-400 placeholder:text-gray-500 focus:ring-0 text-sm h-14 pr-10;
     }
     .search-loader {
         @apply absolute right-12 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 animate-spin;
     }
     .search-count {
-        @apply py-2 px-4 text-sm font-medium text-gray-400 bg-gray-700 border-b border-gray-700;
+        @apply py-2 px-4 text-xs uppercase tracking-wider font-medium text-gray-500 bg-gray-800 border-b border-gray-700;
     }
     .search-item {
-        @apply rounded-none my-3 px-1 w-full data-[selected=true]:bg-gray-600;
+        @apply rounded-none my-2 px-1 w-full data-[selected=true]:bg-gray-700;
     }
     .search-item-link {
-        @apply px-2 w-full cursor-pointer border-b border-gray-600 last:border-b-0 transition-colors flex items-center gap-3;
+        @apply px-2 w-full cursor-pointer border-b border-gray-700 last:border-b-0 transition-colors flex items-center gap-3;
     }
     .search-item-name {
-        @apply font-medium text-base text-gray-400;
+        @apply font-medium text-sm text-gray-400;
     }
     .nav-list {
         @apply flex flex-col sm:flex-row p-2 gap-3 sm:gap-8 font-medium text-sm;
@@ -226,10 +226,10 @@
         @apply w-full grid-cols-1 gap-6 xl:grid-cols-3 space-y-6 sm:space-y-8;
     }
     .watchlist-btn {
-        @apply bg-teal-500 text-base hover:bg-teal-500 text-gray-900 w-full rounded h-11 font-semibold cursor-pointer;
+        @apply bg-teal-500 text-sm hover:bg-teal-600 text-gray-900 w-full rounded-none h-9 font-extrabold cursor-pointer;
     }
     .watchlist-remove {
-        @apply bg-red-500! hover:bg-red-500! text-gray-900!
+        @apply bg-transparent! border! border-teal-500! text-teal-500! hover:bg-gray-700!
     }
     .watchlist-empty-container {
         @apply container gap-8 flex-col items-center md:mt-10 p-6 text-center;
@@ -262,79 +262,79 @@
         @apply !text-teal-500 hover:!text-teal-600;
     }
     .watchlist-icon {
-        @apply w-8 h-8 rounded-full flex items-center justify-center bg-gray-700/50;
+        @apply w-8 h-8 rounded-none flex items-center justify-center bg-gray-700/50;
     }
     .trash-icon {
-        @apply h-4 w-4 text-gray-400 hover:text-red-400;
+        @apply h-4 w-4 text-gray-400 hover:text-teal-500;
     }
     .star-icon {
         @apply h-4 w-4;
     }
     .watchlist-title {
-        @apply text-xl md:text-2xl font-bold text-gray-100;
+        @apply text-xl md:text-2xl font-extrabold text-gray-100;
     }
     .watchlist-table {
-        @apply !relative overflow-hidden !w-full bg-gray-800 border !border-gray-600 !rounded-lg;
+        @apply !relative overflow-hidden !w-full bg-transparent border-0 !rounded-none;
     }
     .table-header-row {
-        @apply text-gray-400 font-medium bg-gray-700 border-b border-gray-600 hover:bg-gray-700;
+        @apply text-gray-500 font-normal uppercase text-[11px] tracking-wider bg-transparent border-b-2 border-gray-600 hover:bg-transparent;
     }
     .table-header:first-child {
-        @apply pl-4;
+        @apply pl-2;
     }
     .table-row {
-        @apply border-b cursor-pointer text-gray-100 border-gray-600 hover:bg-gray-700/50 transition-colors;
+        @apply border-b cursor-pointer text-gray-100 border-gray-700 hover:bg-gray-800 transition-colors;
     }
     .table-cell {
-        @apply font-medium text-base
+        @apply font-normal text-sm
     }
     .add-alert {
-        @apply flex text-sm items-center whitespace-nowrap gap-1.5 px-3 w-fit py-2 text-teal-600 border border-teal-600/20 rounded font-medium bg-transparent hover:bg-transparent cursor-pointer transition-colors;
+        @apply flex text-sm items-center whitespace-nowrap gap-1.5 px-3 w-fit py-2 text-teal-500 border border-teal-500 rounded-none font-medium bg-transparent hover:bg-teal-500 hover:text-gray-900 cursor-pointer transition-colors;
     }
     .watchlist-news {
         @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
     }
     .news-item {
-        @apply bg-gray-800 rounded-lg border w-full border-gray-600  p-4 duration-200 hover:border-gray-600 cursor-pointer;
+        @apply bg-gray-800 rounded-none border w-full border-gray-700 p-4 duration-200 hover:border-teal-500 cursor-pointer;
     }
     .news-tag {
-        @apply inline-block w-fit px-2 py-1 mb-5 rounded bg-gray-600/60 text-green-500 text-sm font-mono font-medium;
+        @apply inline-block w-fit px-2 py-1 mb-4 rounded-none border border-teal-500 text-teal-500 text-[11px] uppercase tracking-wide font-medium;
     }
     .news-title {
-        @apply text-lg  font-semibold text-gray-100 leading-tight mb-3 line-clamp-2;
+        @apply text-base font-semibold text-gray-100 leading-tight mb-3 line-clamp-2;
     }
     .news-meta {
-        @apply flex items-center text-sm text-gray-500 mb-1;
+        @apply flex items-center text-xs text-gray-500 mb-1;
     }
     .news-summary {
-        @apply text-gray-400 flex-1 text-base leading-relaxed mb-3 line-clamp-3;
+        @apply text-gray-400 flex-1 text-sm leading-relaxed mb-3 line-clamp-3;
     }
     .news-cta {
         @apply text-sm align-bottom text-teal-500 hover:text-gray-400;
     }
     .alert-dialog {
-        @apply bg-gray-800 border-gray-600 text-gray-400 max-w-md;
+        @apply bg-gray-800 border-2 border-gray-600 text-gray-400 max-w-md rounded-none;
     }
     .alert-title {
-        @apply text-xl font-semibold text-gray-100;
+        @apply text-xl font-extrabold text-gray-100;
     }
     .alert-list {
-        @apply overflow-y-auto w-full max-h-[911px] rounded-lg flex border border-gray-600 flex-col gap-4 bg-gray-800 p-3 flex-1;
+        @apply overflow-y-auto w-full max-h-[911px] rounded-none flex border border-gray-600 flex-col gap-3 bg-gray-800 p-3 flex-1;
     }
     .alert-empty {
         @apply px-6 py-8 text-center text-gray-500/50;
     }
     .alert-item {
-        @apply p-4 rounded-lg bg-gray-700 border border-gray-600;
+        @apply p-3 rounded-none bg-gray-900 border border-gray-600;
     }
     .alert-name {
-        @apply mb-2 text-lg text-teal-500 font-semibold;
+        @apply mb-2 text-base text-teal-500 font-semibold;
     }
     .alert-details {
-        @apply flex border-b pb-3 items-center justify-between gap-3 mb-2;
+        @apply flex border-b border-gray-600 pb-3 items-center justify-between gap-3 mb-2;
     }
     .alert-company {
-        @apply text-gray-400 text-base;
+        @apply text-gray-400 text-sm;
     }
     .alert-price {
         @apply text-gray-100 font-bold;
@@ -343,10 +343,10 @@
         @apply flex items-end justify-between;
     }
     .alert-update-btn {
-        @apply text-gray-400 rounded-full bg-transparent hover:bg-green-500/15 cursor-pointer;
+        @apply text-gray-400 rounded-none bg-transparent hover:bg-gray-700 cursor-pointer;
     }
     .alert-delete-btn {
-        @apply text-gray-400 rounded-full hover:bg-red-600/15 bg-transparent cursor-pointer transition-colors;
+        @apply text-gray-400 rounded-none hover:bg-gray-700 hover:text-teal-500 bg-transparent cursor-pointer transition-colors;
     }
 }
 
