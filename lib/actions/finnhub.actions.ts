@@ -87,30 +87,48 @@ export async function getCompanyProfile(symbol: string) {
     }
 }
 
+const WATCHLIST_BATCH_SIZE = 10;
+const WATCHLIST_BATCH_DELAY_MS = 300;
+
 export async function getWatchlistData(symbols: string[]) {
     if (!symbols || symbols.length === 0) return [];
 
-    // Fetch quotes and profiles in parallel
-    const promises = symbols.map(async (sym) => {
-        const [quote, profile] = await Promise.all([
-            getQuote(sym),
-            getCompanyProfile(sym)
-        ]);
+    // Fetch in small batches with a short pause between them — firing every
+    // symbol's quote+profile at once can burst past Finnhub's free-tier rate
+    // limit, and a rate-limited call fails silently into a $0.00 row.
+    const results = [];
+    for (let i = 0; i < symbols.length; i += WATCHLIST_BATCH_SIZE) {
+        const batch = symbols.slice(i, i + WATCHLIST_BATCH_SIZE);
 
-        return {
-            symbol: sym,
-            price: quote?.c || 0,
-            change: quote?.d || 0,
-            changePercent: quote?.dp || 0,
-            currency: profile?.currency || 'USD',
-            name: profile?.name || sym,
-            logo: profile?.logo,
-            marketCap: profile?.marketCapitalization,
-            peRatio: 0 // Finnhub 'quote' and 'profile2' don't easily give real-time PE. Might need 'metric' endpoint, but skipping for now to save rate limits.
-        };
-    });
+        const batchResults = await Promise.all(
+            batch.map(async (sym) => {
+                const [quote, profile] = await Promise.all([
+                    getQuote(sym),
+                    getCompanyProfile(sym)
+                ]);
 
-    return await Promise.all(promises);
+                return {
+                    symbol: sym,
+                    price: quote?.c || 0,
+                    change: quote?.d || 0,
+                    changePercent: quote?.dp || 0,
+                    currency: profile?.currency || 'USD',
+                    name: profile?.name || sym,
+                    logo: profile?.logo,
+                    marketCap: profile?.marketCapitalization,
+                    peRatio: 0 // Finnhub 'quote' and 'profile2' don't easily give real-time PE. Might need 'metric' endpoint, but skipping for now to save rate limits.
+                };
+            })
+        );
+
+        results.push(...batchResults);
+
+        if (i + WATCHLIST_BATCH_SIZE < symbols.length) {
+            await new Promise((resolve) => setTimeout(resolve, WATCHLIST_BATCH_DELAY_MS));
+        }
+    }
+
+    return results;
 }
 
 

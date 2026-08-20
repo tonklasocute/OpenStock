@@ -286,9 +286,10 @@ export const checkStockAlerts = inngest.createFunction(
                     const lineLink = await LineLink.findOne({ userId: alert.userId });
                     if (lineLink?.lineUserId) {
                         const conditionText = alert.condition === 'ABOVE' ? 'สูงกว่า' : 'ต่ำกว่า';
+                        const dot = alert.condition === 'ABOVE' ? '🟢' : '🔴';
                         await pushMessage(
                             lineLink.lineUserId,
-                            `🔔 ${alert.symbol} ถึงราคาที่ตั้งไว้แล้ว\nเงื่อนไข: ราคา${conditionText} $${alert.targetPrice}\nราคาปัจจุบัน: $${currentPrice}`
+                            `🔔💗 ${alert.symbol} ถึงราคาเป้าหมายแล้วนะ! 🎯\n\n${dot} เงื่อนไข: ราคา${conditionText} $${alert.targetPrice}\n💰 ราคาปัจจุบัน: $${currentPrice}\n\n✨ รีบไปดูเลยน้า~`
                         );
                     }
                 }
@@ -519,15 +520,20 @@ export const sendDailyLineDigest = inngest.createFunction(
                     ]);
 
                     const priceLines = priceData
-                        .map((item: any) => `${item.symbol}: $${item.price.toFixed(2)} (${item.changePercent >= 0 ? '+' : ''}${item.changePercent.toFixed(2)}%)`)
+                        .map((item: any) => {
+                            const isUp = item.changePercent >= 0;
+                            const dot = isUp ? '🟢' : '🔴';
+                            const sign = isUp ? '+' : '';
+                            return `${dot} ${item.symbol}  $${item.price.toFixed(2)}  (${sign}${item.changePercent.toFixed(2)}%)`;
+                        })
                         .join('\n');
 
                     const newsLines = news
                         .slice(0, 5)
-                        .map((article: any) => `• ${article.headline}`)
+                        .map((article: any) => `🌸 ${article.headline}`)
                         .join('\n');
 
-                    const text = `📊 สรุป Watchlist ประจำวัน\n\n${priceLines}\n\n📰 ข่าวที่เกี่ยวข้อง\n${newsLines || 'ไม่มีข่าวใหม่วันนี้'}`;
+                    const text = `🩷 สรุป Watchlist ประจำวันนี้ 🩷\nอัปเดตราคาหุ้นที่ติดตามให้แล้วนะ~ 🐣\n\n${priceLines}\n\n✨━━━━━━━━━━✨\n📰 ข่าวเด่นวันนี้\n\n${newsLines || 'วันนี้ยังไม่มีข่าวใหม่ค่ะ 🌙'}\n\n💖 ขอให้พอร์ตวันนี้เขียวปังนะ!`;
 
                     const result = await pushMessages(link.lineUserId, splitMessage(text));
                     return result.status; // 'sent' | 'failed'
