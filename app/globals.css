@@ -44,6 +44,7 @@
 
 :root {
     --radius: 0rem;
+    --radius-xl: 0rem;
     --background: #f3f2f2;
     --foreground: #201e1d;
     --card: #eae9e9;
