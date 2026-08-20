@@ -49,7 +49,7 @@ function TradingViewWatchlist({ symbols }: TradingViewWatchlistProps) {
     }, [symbols]);
 
     return (
-        <div className="tradingview-widget-container border border-black/10 rounded-xl overflow-hidden shadow-2xl bg-white/70 backdrop-blur-md" ref={container}>
+        <div className="tradingview-widget-container border border-black/10 rounded-none overflow-hidden bg-white/70" ref={container}>
             <div className="tradingview-widget-container__widget"></div>
         </div>
     );
