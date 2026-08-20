@@ -22,17 +22,17 @@ export default function NewsGrid({ news }: NewsGridProps) {
                         href={item.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block bg-gray-900/30 border border-gray-600 rounded-lg overflow-hidden hover:border-gray-700 transition-colors group"
+                        className="block bg-gray-800 border border-gray-600 rounded-none overflow-hidden hover:border-teal-500 transition-colors group"
                     >
                         <div className="p-4 flex flex-col h-full">
                             <div className="flex items-start justify-between mb-2">
-                                <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${item.related ? "bg-blue-100 text-blue-700" : "bg-gray-800 text-gray-400"
+                                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-none ${item.related ? "bg-teal-500 text-gray-900" : "bg-gray-900 text-gray-400"
                                     }`}>
                                     {item.related || "MARKET"}
                                 </span>
                                 <ExternalLink className="w-3 h-3 text-gray-500 group-hover:text-gray-400" />
                             </div>
-                            <h3 className="text-sm font-semibold text-gray-200 mb-2 line-clamp-2 group-hover:text-blue-400 transition-colors">
+                            <h3 className="text-sm font-semibold text-gray-200 mb-2 line-clamp-2 group-hover:text-teal-500 transition-colors">
                                 {item.headline}
                             </h3>
                             <p className="text-xs text-gray-500 line-clamp-3 mb-4 flex-1">
