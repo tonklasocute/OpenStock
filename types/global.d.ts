@@ -49,17 +49,17 @@ declare global {
         required?: boolean;
     };
 
-    type RadioGroupFieldProps = {
+    type RadioFieldProps = {
         name: string;
         label: string;
         options: readonly Option[];
         control: Control;
         error?: FieldError;
         required?: boolean;
+        variant: 'stacked' | 'segmented';
     };
 
-    type SegmentedFieldProps = RadioGroupFieldProps;
-    type TagChipFieldProps = RadioGroupFieldProps;
+    type TagChipFieldProps = Omit<RadioFieldProps, 'variant'>;
 
     type FooterLinkProps = {
         text: string;

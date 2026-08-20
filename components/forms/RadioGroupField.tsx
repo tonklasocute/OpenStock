@@ -2,7 +2,7 @@ import React from 'react'
 import { Label } from "@/components/ui/label";
 import { Controller } from "react-hook-form";
 
-const RadioGroupField = ({ name, label, options, control, error, required = false }: RadioGroupFieldProps) => {
+const RadioField = ({ name, label, options, control, error, required = false, variant }: RadioFieldProps) => {
     return (
         <div className="space-y-2">
             <Label htmlFor={name} className="form-label">{label}</Label>
@@ -11,9 +11,9 @@ const RadioGroupField = ({ name, label, options, control, error, required = fals
                 control={control}
                 rules={{ required: required ? `Please select ${label.toLowerCase()}` : false }}
                 render={({ field }) => (
-                    <div className="flex flex-col gap-2">
+                    <div className={variant === 'segmented' ? 'seg' : 'flex flex-col gap-2'}>
                         {options.map((option) => (
-                            <label key={option.value} className="radio">
+                            <label key={option.value} className={variant === 'segmented' ? 'seg-opt' : 'radio'}>
                                 <input
                                     type="radio"
                                     name={name}
@@ -22,7 +22,7 @@ const RadioGroupField = ({ name, label, options, control, error, required = fals
                                     onChange={() => field.onChange(option.value)}
                                     className="sr-only"
                                 />
-                                <span className="radio-dot" />
+                                {variant === 'stacked' && <span className="radio-dot" />}
                                 {option.label}
                             </label>
                         ))}
@@ -33,4 +33,4 @@ const RadioGroupField = ({ name, label, options, control, error, required = fals
         </div>
     )
 }
-export default RadioGroupField
+export default RadioField

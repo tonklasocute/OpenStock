@@ -12,12 +12,13 @@ const TagChipField = ({ name, label, options, control, error, required = false }
                 control={control}
                 rules={{ required: required ? `Please select ${label.toLowerCase()}` : false }}
                 render={({ field }) => (
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={label}>
                         {options.map((option) => (
                             <button
                                 key={option.value}
                                 type="button"
                                 onClick={() => field.onChange(option.value)}
+                                aria-pressed={field.value === option.value}
                                 className={cn('tag', field.value === option.value ? 'tag-accent' : 'tag-neutral')}
                             >
                                 {option.label}
