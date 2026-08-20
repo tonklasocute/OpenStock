@@ -205,6 +205,9 @@
     .tag-neutral {
         @apply bg-transparent border-gray-600 text-gray-400 hover:border-teal-500 hover:text-teal-500;
     }
+    .tag-outline {
+        @apply border border-teal-500 text-teal-500 bg-transparent;
+    }
     .footer-link {
         @apply text-gray-400 font-medium hover:text-teal-500 hover:underline transition-colors;
     }

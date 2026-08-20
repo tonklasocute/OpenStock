@@ -42,7 +42,7 @@ export default function WatchlistStockChip({ symbol, userId }: WatchlistStockChi
     };
 
     return (
-        <div className="group flex items-center gap-2 px-3 py-1.5 bg-gray-800 hover:bg-gray-700/80 rounded-full border border-gray-700 transition-all">
+        <div className="group flex items-center gap-2 px-3 py-1.5 bg-gray-800 hover:bg-gray-700 rounded-none border border-gray-600 transition-all">
             <span className="font-semibold text-sm text-gray-100">{symbol}</span>
 
             {/* Divider */}
@@ -51,7 +51,7 @@ export default function WatchlistStockChip({ symbol, userId }: WatchlistStockChi
             {/* Alert Button */}
             <button
                 onClick={handleBellClick}
-                className="text-gray-400 hover:text-yellow-400 transition-colors p-0.5"
+                className="text-gray-400 hover:text-teal-500 transition-colors p-0.5"
                 title="Create Alert"
                 disabled={loadingPrice}
             >
@@ -60,7 +60,7 @@ export default function WatchlistStockChip({ symbol, userId }: WatchlistStockChi
 
             {/* Remove Button */}
             <form action={handleRemove}>
-                <button type="submit" className="text-gray-400 hover:text-red-400 transition-colors p-0.5" title="Remove">
+                <button type="submit" className="text-gray-400 hover:text-teal-500 transition-colors p-0.5" title="Remove">
                     <X className="w-3.5 h-3.5" />
                 </button>
             </form>

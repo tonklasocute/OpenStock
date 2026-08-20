@@ -34,14 +34,14 @@ export default function ConnectLineCard({ userId, initiallyConnected }: ConnectL
 
     if (connected) {
         return (
-            <div className="bg-gray-800/40 rounded-lg p-3 border border-gray-600 mb-4 text-sm text-gray-100">
+            <div className="bg-gray-900 rounded-none p-3 border border-gray-600 mb-4 text-sm text-gray-100">
                 🔔 เชื่อมต่อ LINE แล้ว ✓
             </div>
         );
     }
 
     return (
-        <div className="bg-gray-800/40 rounded-lg p-3 border border-gray-600 mb-4">
+        <div className="bg-gray-900 rounded-none p-3 border border-gray-600 mb-4">
             <div className="text-sm font-semibold text-gray-100 mb-2">เชื่อมต่อ LINE เพื่อรับแจ้งเตือน</div>
             {code ? (
                 <div className="space-y-2">
@@ -74,7 +74,7 @@ export default function ConnectLineCard({ userId, initiallyConnected }: ConnectL
                 <button
                     onClick={handleGenerate}
                     disabled={loading}
-                    className="text-xs bg-teal-500 hover:bg-teal-600 text-white px-3 py-1.5 rounded font-medium disabled:opacity-50"
+                    className="text-xs bg-teal-500 hover:bg-teal-600 text-gray-900 px-3 py-1.5 rounded-none font-medium disabled:opacity-50"
                 >
                     {loading ? 'กำลังสร้างรหัส...' : 'สร้างรหัสเชื่อมต่อ'}
                 </button>
