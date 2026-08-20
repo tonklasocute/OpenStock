@@ -1,11 +1,12 @@
 import Link from "next/link";
 import React from "react";
 import { ChevronUp } from "lucide-react";
+import Logo from "@/components/Logo";
 
 export const AuthLeftPanel = ({ children }: { children: React.ReactNode }) => (
     <section className="auth-left-section scrollbar-hide-default">
-        <Link href="/" className="auth-logo inline-block text-lg font-extrabold text-gray-100 tracking-tight">
-            TONKLA
+        <Link href="/" className="auth-logo inline-block">
+            <Logo size={36} />
         </Link>
         <div className="pb-6 lg:pb-8 flex-1">
             {children}

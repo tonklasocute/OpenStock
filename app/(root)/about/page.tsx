@@ -21,7 +21,7 @@ export default function AboutPage() {
             <section className="text-center space-y-8 pt-16 mb-20">
                 <div className="flex justify-center mb-6">
                     <div className="p-4 rounded-none border border-teal-500/20">
-                        <Logo size={40} showWordmark={false} />
+                        <Logo size={40} />
                     </div>
                 </div>
 
@@ -77,7 +77,7 @@ export default function AboutPage() {
                     </div>
                 </div>
                 <div className="relative h-[400px] w-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-none overflow-hidden border border-gray-700 group flex items-center justify-center">
-                    <Logo size={96} showWordmark={false} className="opacity-80 group-hover:scale-105 transition-transform duration-700" />
+                    <Logo size={96} className="opacity-80 group-hover:scale-105 transition-transform duration-700" />
                 </div>
             </section>
 
