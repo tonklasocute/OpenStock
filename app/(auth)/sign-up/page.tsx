@@ -13,6 +13,7 @@ import { signUpWithEmail } from "@/lib/actions/auth.actions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import React from "react";
+import { AuthLeftPanel } from "@/components/auth/AuthPanels";
 
 const SignUp = () => {
     const router = useRouter()
@@ -29,8 +30,8 @@ const SignUp = () => {
             password: '',
             country: 'IN',
             investmentGoals: 'Growth',
-            riskTolerance: 'Medium',
-            preferredIndustry: 'Technology'
+            riskTolerance: 'Balanced',
+            preferredIndustry: ['Technology', 'Finance']
         },
         mode: 'onBlur'
     },);
@@ -56,53 +57,57 @@ const SignUp = () => {
     }
 
     return (
-        <>
-            <h1 className="form-title">Sign Up & Personalize</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="contents">
+            <AuthLeftPanel>
+                <h1 className="form-title">Sign Up & Personalize</h1>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-                <InputField
-                    name="fullName"
-                    label="Full Name"
-                    placeholder="Enter full name"
-                    register={register}
-                    error={errors.fullName}
-                    validation={{ required: 'Full name is required', minLength: 2 }}
-                />
+                <div className="space-y-5">
+                    <InputField
+                        name="fullName"
+                        label="Full Name"
+                        placeholder="Enter full name"
+                        register={register}
+                        error={errors.fullName}
+                        validation={{ required: 'Full name is required', minLength: 2 }}
+                    />
 
-                <InputField
-                    name="email"
-                    label="Email"
-                    placeholder="you@example.com"
-                    register={register}
-                    error={errors.email}
-                    validation={{
-                        required: 'Email is required',
-                        pattern: {
-                            value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/,
-                            message: 'Please enter a valid email address'
-                        }
-                    }}
-                />
+                    <InputField
+                        name="email"
+                        label="Email"
+                        placeholder="you@example.com"
+                        register={register}
+                        error={errors.email}
+                        validation={{
+                            required: 'Email is required',
+                            pattern: {
+                                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/,
+                                message: 'Please enter a valid email address'
+                            }
+                        }}
+                    />
 
-                <InputField
-                    name="password"
-                    label="Password"
-                    placeholder="Enter a strong password"
-                    type="password"
-                    register={register}
-                    error={errors.password}
-                    validation={PASSWORD_VALIDATION}
-                />
-                <PasswordRequirements password={passwordValue ?? ''} />
+                    <InputField
+                        name="password"
+                        label="Password"
+                        placeholder="Enter a strong password"
+                        type="password"
+                        register={register}
+                        error={errors.password}
+                        validation={PASSWORD_VALIDATION}
+                    />
+                    <PasswordRequirements password={passwordValue ?? ''} />
 
-                <CountrySelectField
-                    name="country"
-                    label="Country"
-                    control={control}
-                    error={errors.country}
-                    required
-                />
+                    <CountrySelectField
+                        name="country"
+                        label="Country"
+                        control={control}
+                        error={errors.country}
+                        required
+                    />
+                </div>
+            </AuthLeftPanel>
 
+            <section className="auth-right-section gap-7">
                 <RadioField
                     name="investmentGoals"
                     label="Investment Goals"
@@ -112,6 +117,8 @@ const SignUp = () => {
                     variant="stacked"
                     required
                 />
+
+                <div className="border-t-2 border-gray-600" />
 
                 <RadioField
                     name="riskTolerance"
@@ -123,6 +130,8 @@ const SignUp = () => {
                     required
                 />
 
+                <div className="border-t-2 border-gray-600" />
+
                 <TagChipField
                     name="preferredIndustry"
                     label="Preferred Industry"
@@ -132,13 +141,13 @@ const SignUp = () => {
                     required
                 />
 
-                <Button type="submit" disabled={isSubmitting} className="yellow-btn w-full mt-5">
+                <Button type="submit" disabled={isSubmitting} className="yellow-btn w-full mt-auto">
                     {isSubmitting ? 'Creating Account' : 'Start Your Investing Journey'}
                 </Button>
 
                 <FooterLink text="Already have an account?" linkText="Sign in" href="/sign-in" />
-            </form>
-        </>
+            </section>
+        </form>
     )
 }
 export default SignUp;

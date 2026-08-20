@@ -4,8 +4,8 @@ import { Controller } from "react-hook-form";
 
 const RadioField = ({ name, label, options, control, error, required = false, variant }: RadioFieldProps) => {
     return (
-        <div className="space-y-2">
-            <Label htmlFor={name} className="form-label">{label}</Label>
+        <div className="space-y-3">
+            <Label htmlFor={name} className="text-xl font-extrabold text-gray-100">{label}</Label>
             <Controller
                 name={name}
                 control={control}

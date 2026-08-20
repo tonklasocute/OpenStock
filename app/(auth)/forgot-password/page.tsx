@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import InputField from '@/components/forms/InputField';
 import FooterLink from '@/components/forms/FooterLink';
 import { requestPasswordResetEmail } from '@/lib/actions/auth.actions';
+import { AuthShell } from '@/components/auth/AuthPanels';
 
 type ForgotPasswordFormData = {
     email: string;
@@ -44,7 +45,7 @@ const ForgotPasswordPage = () => {
     };
 
     return (
-        <>
+        <AuthShell>
             <h1 className="form-title">Forgot your password?</h1>
             <p className="text-sm text-gray-400 mb-6">
                 Enter your email address and we&apos;ll send you a password reset link.
@@ -72,7 +73,7 @@ const ForgotPasswordPage = () => {
 
                 <FooterLink text="Remembered it?" linkText="Sign in" href="/sign-in" />
             </form>
-        </>
+        </AuthShell>
     );
 };
 

@@ -8,22 +8,22 @@ export const NAV_ITEMS = [
 export const INVESTMENT_GOALS = [
     { value: 'Growth', label: 'Growth' },
     { value: 'Income', label: 'Income' },
-    { value: 'Balanced', label: 'Balanced' },
-    { value: 'Conservative', label: 'Conservative' },
+    { value: 'Preservation', label: 'Preservation' },
 ];
 
 export const RISK_TOLERANCE_OPTIONS = [
-    { value: 'Low', label: 'Low' },
-    { value: 'Medium', label: 'Medium' },
-    { value: 'High', label: 'High' },
+    { value: 'Conservative', label: 'Conservative' },
+    { value: 'Balanced', label: 'Balanced' },
+    { value: 'Aggressive', label: 'Aggressive' },
 ];
 
 export const PREFERRED_INDUSTRIES = [
     { value: 'Technology', label: 'Technology' },
-    { value: 'Healthcare', label: 'Healthcare' },
     { value: 'Finance', label: 'Finance' },
+    { value: 'Healthcare', label: 'Healthcare' },
     { value: 'Energy', label: 'Energy' },
-    { value: 'Consumer Goods', label: 'Consumer Goods' },
+    { value: 'Retail', label: 'Retail' },
+    { value: 'Industrials', label: 'Industrials' },
 ];
 
 export const ALERT_TYPE_OPTIONS = [

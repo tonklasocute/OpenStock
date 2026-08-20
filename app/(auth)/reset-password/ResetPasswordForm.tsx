@@ -11,6 +11,7 @@ import PasswordRequirements from '@/components/forms/PasswordRequirements';
 import { Button } from '@/components/ui/button';
 import { resetPasswordWithToken } from '@/lib/actions/auth.actions';
 import { PASSWORD_VALIDATION } from '@/lib/constants';
+import { AuthShell } from '@/components/auth/AuthPanels';
 
 type ResetPasswordFormData = {
     newPassword: string;
@@ -73,7 +74,7 @@ const ResetPasswordForm = () => {
     };
 
     return (
-        <>
+        <AuthShell>
             <h1 className="form-title">Choose a new password</h1>
             <p className="text-sm text-gray-400 mb-6">
                 Enter a new password for your account.
@@ -111,7 +112,7 @@ const ResetPasswordForm = () => {
 
                 <FooterLink text="Need a fresh link?" linkText="Request another one" href="/forgot-password" />
             </form>
-        </>
+        </AuthShell>
     );
 };
 

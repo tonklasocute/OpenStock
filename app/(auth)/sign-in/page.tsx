@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { AuthShell } from "@/components/auth/AuthPanels";
 
 const SignIn = () => {
     const router = useRouter()
@@ -43,8 +44,11 @@ const SignIn = () => {
     }
 
     return (
-        <>
-            <h1 className="form-title">Welcome back</h1>
+        <AuthShell>
+            <div className="mb-8">
+                <h1 className="text-[32px] font-extrabold text-gray-400 tracking-tight">Welcome back</h1>
+                <p className="text-sm text-gray-500 mt-2">Sign in to your watchlist and alerts.</p>
+            </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <InputField
@@ -84,7 +88,7 @@ const SignIn = () => {
 
                 <FooterLink text="Don't have an account?" linkText="Create an account" href="/sign-up" />
             </form>
-        </>
+        </AuthShell>
     );
 };
 export default SignIn;
