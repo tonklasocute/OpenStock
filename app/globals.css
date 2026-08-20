@@ -454,8 +454,8 @@
 }
 
 .custom-chart.tradingview-widget-container iframe {
-    border: 1px solid #FBCFE8;
-    border-radius: 8px !important;
+    border: 2px solid color-mix(in srgb, #201e1d 40%, transparent);
+    border-radius: 0 !important;
     overflow: hidden !important;
 }
 

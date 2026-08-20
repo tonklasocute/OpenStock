@@ -71,7 +71,7 @@ const WatchlistButton = ({
                 type="button"
                 title={added ? `Remove ${symbol} from watchlist` : `Add ${symbol} to watchlist`}
                 aria-label={added ? `Remove ${symbol} from watchlist` : `Add ${symbol} to watchlist`}
-                className={`flex items-center justify-center p-2 rounded-full transition-all ${added ? "text-yellow-400 hover:bg-yellow-400/10" : "text-gray-400 hover:text-gray-100 hover:bg-black/10"} ${loading ? "opacity-50 cursor-wait" : ""}`}
+                className={`flex items-center justify-center p-2 rounded-none transition-all ${added ? "text-teal-500 hover:bg-teal-500/10" : "text-gray-400 hover:text-gray-100 hover:bg-gray-800"} ${loading ? "opacity-50 cursor-wait" : ""}`}
                 onClick={handleClick}
                 disabled={loading}
             >

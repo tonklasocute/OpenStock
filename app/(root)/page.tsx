@@ -11,7 +11,7 @@ const Home = () => {
 
     return (
         <div className="flex min-h-screen home-wrapper">
-            <section className="grid w-full gap-8 home-section">
+            <section className="grid w-full gap-8 home-section pb-8 border-b-2 border-gray-600">
                 <div className="md:col-span-1 xl:col-span-1">
                     <TradingViewWidget
                         title="Market Overview"
@@ -30,7 +30,7 @@ const Home = () => {
                     />
                 </div>
             </section>
-            <section className="grid w-full gap-8 home-section">
+            <section className="grid w-full gap-8 home-section pt-2">
                 <div className="h-full md:col-span-1 xl:col-span-2">
                     <TradingViewWidget
                         scriptUrl={`${scriptUrl}market-quotes.js`}
