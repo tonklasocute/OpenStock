@@ -17,20 +17,20 @@ function formatCompactNumber(value: number): string {
 }
 
 function getTrendClasses(trend: string | null): string {
-    if (trend === 'rising') return 'text-emerald-400';
-    if (trend === 'falling') return 'text-rose-400';
-    if (trend === 'stable') return 'text-amber-300';
+    if (trend === 'rising') return 'text-teal-500';
+    if (trend === 'falling') return 'text-gray-500';
+    if (trend === 'stable') return 'text-gray-400';
     return 'text-gray-400';
 }
 
 function getAlignmentClasses(alignment: string): string {
-    if (alignment === 'Bullish alignment') return 'text-emerald-400';
-    if (alignment === 'Bearish alignment' || alignment === 'Wide divergence') return 'text-rose-400';
-    if (alignment === 'Tight alignment') return 'text-blue-300';
-    if (alignment === 'Mixed') return 'text-amber-300';
-    if (alignment === 'Single-source view') return 'text-slate-300';
-    if (alignment === 'No sentiment mix') return 'text-zinc-400';
-    return 'text-gray-300';
+    if (alignment === 'Bullish alignment') return 'text-teal-500';
+    if (alignment === 'Bearish alignment' || alignment === 'Wide divergence') return 'text-gray-500';
+    if (alignment === 'Tight alignment') return 'text-gray-400';
+    if (alignment === 'Mixed') return 'text-gray-400';
+    if (alignment === 'Single-source view') return 'text-gray-400';
+    if (alignment === 'No sentiment mix') return 'text-gray-400';
+    return 'text-gray-400';
 }
 
 export default function StockSentimentCard({ insight }: StockSentimentCardProps) {

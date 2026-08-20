@@ -18,7 +18,8 @@ const TagChipField = ({ name, label, options, control, error, required = false }
                                 key={option.value}
                                 type="button"
                                 onClick={() => field.onChange(option.value)}
-                                aria-pressed={field.value === option.value}
+                                role="radio"
+                                aria-checked={field.value === option.value}
                                 className={cn('tag', field.value === option.value ? 'tag-accent' : 'tag-neutral')}
                             >
                                 {option.label}

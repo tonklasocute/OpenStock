@@ -159,9 +159,6 @@
     .form-input {
         @apply h-9 px-2.5 py-1.5 text-gray-400 text-sm placeholder:text-gray-500 bg-gray-800 border-gray-600 rounded-none focus:!border-teal-500 focus:ring-0;
     }
-    .select-trigger {
-        @apply w-full !h-9 px-2.5 py-1.5 text-sm border-gray-600 bg-gray-800 text-gray-400 rounded-none focus:!border-teal-500 focus:ring-0;
-    }
     .country-select-trigger {
         @apply h-9 px-2.5 py-1.5 text-sm w-full justify-between font-normal border-gray-600 bg-gray-800 text-gray-400 rounded-none focus:!border-teal-500 focus:ring-0;
     }
@@ -253,38 +250,14 @@
     .nav-list {
         @apply flex flex-col sm:flex-row p-2 gap-3 sm:gap-8 font-medium text-sm;
     }
-    .stock-details-container {
-        @apply w-full grid-cols-1 gap-6 xl:grid-cols-3 space-y-6 sm:space-y-8;
-    }
     .watchlist-btn {
         @apply bg-teal-500 text-sm hover:bg-teal-600 text-gray-900 w-full rounded-none h-9 font-extrabold cursor-pointer;
     }
     .watchlist-remove {
         @apply bg-transparent! border! border-teal-500! text-teal-500! hover:bg-gray-700!
     }
-    .watchlist-empty-container {
-        @apply container gap-8 flex-col items-center md:mt-10 p-6 text-center;
-    }
-    .watchlist-empty {
-        @apply flex flex-col items-center justify-center text-center;
-    }
-    .watchlist-star {
-        @apply h-16 w-16 text-gray-500 mb-4;
-    }
-    .empty-title {
-        @apply text-xl font-semibold text-gray-400 mb-2;
-    }
-    .empty-description {
-        @apply text-gray-500 mb-6 max-w-md;
-    }
-    .watchlist-container {
-        @apply flex flex-col-reverse lg:grid lg:grid-cols-3 gap-8;
-    }
     .watchlist {
         @apply lg:col-span-2 space-y-8;
-    }
-    .watchlist-alerts {
-        @apply items-start gap-6 h-full flex-col w-full lg:col-span-1;
     }
     .watchlist-icon-btn {
         @apply w-fit cursor-pointer hover:bg-transparent! text-gray-400 hover:text-teal-500;
@@ -292,93 +265,28 @@
     .watchlist-icon-added {
         @apply !text-teal-500 hover:!text-teal-600;
     }
-    .watchlist-icon {
-        @apply w-8 h-8 rounded-none flex items-center justify-center bg-gray-700/50;
-    }
-    .trash-icon {
-        @apply h-4 w-4 text-gray-400 hover:text-teal-500;
-    }
-    .star-icon {
-        @apply h-4 w-4;
-    }
-    .watchlist-title {
-        @apply text-xl md:text-2xl font-extrabold text-gray-100;
-    }
-    .watchlist-table {
-        @apply !relative overflow-hidden !w-full bg-transparent border-0 !rounded-none;
-    }
-    .table-header-row {
-        @apply text-gray-500 font-normal uppercase text-[11px] tracking-wider bg-transparent border-b-2 border-gray-600 hover:bg-transparent;
-    }
-    .table-header:first-child {
-        @apply pl-2;
-    }
-    .table-row {
-        @apply border-b cursor-pointer text-gray-100 border-gray-700 hover:bg-gray-800 transition-colors;
-    }
-    .table-cell {
-        @apply font-normal text-sm
-    }
-    .add-alert {
-        @apply flex text-sm items-center whitespace-nowrap gap-1.5 px-3 w-fit py-2 text-teal-500 border border-teal-500 rounded-none font-medium bg-transparent hover:bg-teal-500 hover:text-gray-900 cursor-pointer transition-colors;
-    }
-    .watchlist-news {
-        @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
-    }
-    .news-item {
-        @apply bg-gray-800 rounded-none border w-full border-gray-700 p-4 duration-200 hover:border-teal-500 cursor-pointer;
-    }
-    .news-tag {
-        @apply inline-block w-fit px-2 py-1 mb-4 rounded-none border border-teal-500 text-teal-500 text-[11px] uppercase tracking-wide font-medium;
-    }
-    .news-title {
-        @apply text-base font-semibold text-gray-100 leading-tight mb-3 line-clamp-2;
-    }
-    .news-meta {
-        @apply flex items-center text-xs text-gray-500 mb-1;
-    }
-    .news-summary {
-        @apply text-gray-400 flex-1 text-sm leading-relaxed mb-3 line-clamp-3;
-    }
-    .news-cta {
-        @apply text-sm align-bottom text-teal-500 hover:text-gray-400;
-    }
-    .alert-dialog {
-        @apply bg-gray-800 border-2 border-gray-600 text-gray-400 max-w-md rounded-none;
-    }
     .alert-title {
         @apply text-xl font-extrabold text-gray-100;
-    }
-    .alert-list {
-        @apply overflow-y-auto w-full max-h-[911px] rounded-none flex border border-gray-600 flex-col gap-3 bg-gray-800 p-3 flex-1;
     }
     .alert-empty {
         @apply px-6 py-8 text-center text-gray-500/50;
     }
-    .alert-item {
-        @apply p-3 rounded-none bg-gray-900 border border-gray-600;
-    }
-    .alert-name {
-        @apply mb-2 text-base text-teal-500 font-semibold;
-    }
-    .alert-details {
-        @apply flex border-b border-gray-600 pb-3 items-center justify-between gap-3 mb-2;
-    }
-    .alert-company {
-        @apply text-gray-400 text-sm;
-    }
-    .alert-price {
-        @apply text-gray-100 font-bold;
-    }
-    .alert-actions {
-        @apply flex items-end justify-between;
-    }
-    .alert-update-btn {
-        @apply text-gray-400 rounded-none bg-transparent hover:bg-gray-700 cursor-pointer;
-    }
-    .alert-delete-btn {
-        @apply text-gray-400 rounded-none hover:bg-gray-700 hover:text-teal-500 bg-transparent cursor-pointer transition-colors;
-    }
+}
+
+/* Focus-visible states for custom form controls (radio dots, segmented
+   controls, tag chips) — these use sr-only inputs / plain buttons so they
+   don't inherit a native focus ring from the browser. */
+:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+}
+.radio input:focus-visible + .radio-dot {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+}
+.seg-opt:has(input:focus-visible) {
+    outline: 2px solid var(--color-ring);
+    outline-offset: -2px;
 }
 
 /* Market News Component Styles */

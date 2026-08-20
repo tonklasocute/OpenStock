@@ -39,16 +39,6 @@ declare global {
         label: string;
     };
 
-    type SelectFieldProps = {
-        name: string;
-        label: string;
-        placeholder: string;
-        options: readonly Option[];
-        control: Control;
-        error?: FieldError;
-        required?: boolean;
-    };
-
     type RadioFieldProps = {
         name: string;
         label: string;

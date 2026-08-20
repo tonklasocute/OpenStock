@@ -24,6 +24,12 @@ export default function WatchlistManager({ initialItems, userId }: WatchlistMana
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
     const [filter, setFilter] = useState<WatchlistFilter>('all');
 
+    // WatchlistItem has no changePercent field today, so the Gainers/Losers
+    // filter has nothing to filter on and must stay hidden until it does.
+    const hasChangeData = initialItems.some(
+        (item: any) => typeof item.changePercent === 'number'
+    );
+
     const toggleSort = () => {
         if (sortOrder === null) setSortOrder('asc');
         else if (sortOrder === 'asc') setSortOrder('desc');
@@ -60,21 +66,23 @@ export default function WatchlistManager({ initialItems, userId }: WatchlistMana
                         </span>
                     </h3>
                     <div className="flex items-center gap-3">
-                        <div className="seg">
-                            {FILTER_OPTIONS.map((option) => (
-                                <label key={option.value} className="seg-opt">
-                                    <input
-                                        type="radio"
-                                        name="watchlist-filter"
-                                        value={option.value}
-                                        checked={filter === option.value}
-                                        onChange={() => setFilter(option.value)}
-                                        className="sr-only"
-                                    />
-                                    {option.label}
-                                </label>
-                            ))}
-                        </div>
+                        {hasChangeData && (
+                            <div className="seg">
+                                {FILTER_OPTIONS.map((option) => (
+                                    <label key={option.value} className="seg-opt">
+                                        <input
+                                            type="radio"
+                                            name="watchlist-filter"
+                                            value={option.value}
+                                            checked={filter === option.value}
+                                            onChange={() => setFilter(option.value)}
+                                            className="sr-only"
+                                        />
+                                        {option.label}
+                                    </label>
+                                ))}
+                            </div>
+                        )}
                         <Button
                             variant="ghost"
                             size="sm"

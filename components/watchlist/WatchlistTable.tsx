@@ -118,7 +118,7 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
                                     {formatCurrency(stock.price)}
                                 </td>
                                 <td className={`px-6 py-4 font-medium`}>
-                                    <div className={`flex items-center w-fit px-2 py-1 ${isPositive ? "tag-accent" : "tag-neutral"}`}>
+                                    <div className={`tag flex items-center w-fit ${isPositive ? "tag-accent" : "tag-neutral"}`}>
                                         {isPositive ? <ChevronUp className="w-3.5 h-3.5 mr-1.5" /> : <ChevronDown className="w-3.5 h-3.5 mr-1.5" />}
                                         {Math.abs(stock.changePercent).toFixed(2)}%
                                     </div>
