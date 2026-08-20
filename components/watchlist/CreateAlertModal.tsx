@@ -5,7 +5,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { createAlert } from "@/lib/actions/alert.actions";
 import { toast } from "sonner"; // Assuming sonner is available or use existing toast
 
@@ -75,9 +74,9 @@ export default function CreateAlertModal({
                     {children}
                 </DialogTrigger>
             )}
-            <DialogContent className="sm:max-w-[425px] bg-white border-gray-600 text-gray-100 shadow-2xl">
+            <DialogContent className="sm:max-w-[425px] bg-gray-800 border-2 border-gray-600 text-gray-100">
                 <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold tracking-tight text-gray-100 mb-2">Price Alert</DialogTitle>
+                    <DialogTitle className="text-2xl font-extrabold tracking-tight text-gray-100 mb-2">Price Alert</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-5 py-2 relative z-10">
 
@@ -88,7 +87,7 @@ export default function CreateAlertModal({
                             value={alertName}
                             onChange={(e) => setAlertName(e.target.value)}
                             placeholder="e.g. Apple at Discount"
-                            className="bg-gray-900 border-gray-700 text-gray-100 placeholder:text-gray-500 focus:border-yellow-500 focus:ring-yellow-500/20 transition-all rounded-md h-10"
+                            className="bg-gray-900 border-gray-600 text-gray-100 placeholder:text-gray-500 focus:border-teal-500 focus:ring-0 rounded-none h-10"
                         />
                     </div>
 
@@ -99,50 +98,52 @@ export default function CreateAlertModal({
                             <Input
                                 disabled
                                 value={`${companyName || symbol} (${symbol})`}
-                                className="bg-gray-900 border-none text-gray-500 shadow-inner rounded-md h-10"
+                                className="bg-gray-900 border border-gray-600 text-gray-500 rounded-none h-10"
                             />
                         </div>
-                    </div>
-
-                    {/* Alert Type */}
-                    <div className="grid gap-2">
-                        <Label className="text-gray-400 text-sm font-medium">Alert type</Label>
-                        <Select disabled defaultValue="price">
-                            <SelectTrigger className="bg-gray-900 border-gray-600 text-gray-200">
-                                <SelectValue placeholder="Select type" />
-                            </SelectTrigger>
-                            <SelectContent className="bg-gray-900 border-gray-600 text-gray-200">
-                                <SelectItem value="price">Price</SelectItem>
-                            </SelectContent>
-                        </Select>
                     </div>
 
                     {/* Condition */}
                     <div className="grid gap-2">
                         <Label className="text-gray-400 text-sm font-medium">Condition</Label>
-                        <Select value={condition} onValueChange={(val: any) => setCondition(val)}>
-                            <SelectTrigger className="bg-gray-900 border-gray-600 text-gray-200 hover:border-gray-500 transition-colors">
-                                <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent className="bg-gray-900 border-gray-600 text-gray-200">
-                                <SelectItem value="ABOVE">Greater than {">"}</SelectItem>
-                                <SelectItem value="BELOW">Less than {"<"}</SelectItem>
-                            </SelectContent>
-                        </Select>
+                        <div className="seg">
+                            <label className="seg-opt">
+                                <input
+                                    type="radio"
+                                    name="alert-condition"
+                                    value="ABOVE"
+                                    checked={condition === "ABOVE"}
+                                    onChange={() => setCondition("ABOVE")}
+                                    className="sr-only"
+                                />
+                                Above
+                            </label>
+                            <label className="seg-opt">
+                                <input
+                                    type="radio"
+                                    name="alert-condition"
+                                    value="BELOW"
+                                    checked={condition === "BELOW"}
+                                    onChange={() => setCondition("BELOW")}
+                                    className="sr-only"
+                                />
+                                Below
+                            </label>
+                        </div>
                     </div>
 
                     {/* Threshold Value */}
                     <div className="grid gap-2">
                         <Label className="text-gray-400 text-sm font-medium">Threshold value</Label>
                         <div className="relative">
-                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-yellow-500 font-semibold">$</span>
+                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-teal-500 font-semibold">$</span>
                             <Input
                                 type="number"
                                 step="0.01"
                                 value={targetPrice}
                                 onChange={(e) => setTargetPrice(e.target.value)}
                                 placeholder="eg: 140"
-                                className="pl-7 bg-gray-900 border-gray-600 text-gray-100 placeholder:text-gray-500 focus:border-yellow-500 focus:ring-yellow-500/20 transition-all rounded-md h-10 font-mono"
+                                className="pl-7 bg-gray-900 border-gray-600 text-gray-100 placeholder:text-gray-500 focus:border-teal-500 focus:ring-0 transition-all rounded-none h-10 font-mono"
                             />
                         </div>
                     </div>
@@ -150,7 +151,7 @@ export default function CreateAlertModal({
                     {/* Expiry Note */}
                     <div className="pt-1">
                         <p className="text-xs text-gray-500 flex items-center">
-                            <span className="w-1.5 h-1.5 rounded-full bg-yellow-500/50 mr-2"></span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-teal-500/50 mr-2"></span>
                             Alert expires automatically in 90 days
                         </p>
                     </div>
@@ -159,7 +160,7 @@ export default function CreateAlertModal({
                         <Button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-[#FACC15] hover:bg-[#EAB308] text-black font-bold h-11 text-base transition-all shadow-[0_0_15px_rgba(250,204,21,0.2)]"
+                            className="w-full bg-teal-500 hover:bg-teal-600 text-gray-900 font-extrabold h-11 text-base rounded-none"
                         >
                             {loading ? "Creating Alert..." : "Create Alert"}
                         </Button>
