@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="./styles.css">
+<style>
+body{margin:0;background:#dcdad9;font-family:var(--font-body)}
+.dv-turn{padding:48px 56px 40px}
+.dv-thd{display:flex;align-items:baseline;gap:14px;margin:0 0 6px}
+.dv-tid{font:800 11px var(--font-heading);padding:4px 9px;background:var(--color-text);color:var(--color-bg)}
+.dv-tname{font:800 15px var(--font-heading);color:var(--color-text)}
+.dv-tsub{margin:0 0 28px;font:14px/1.5 var(--font-body);color:color-mix(in srgb, var(--color-text) 60%, transparent);max-width:760px}
+.dv-group{margin:36px 0 12px}
+.dv-glabel{font:600 11px var(--font-heading);letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700);margin:0 0 14px;padding-top:14px;border-top:2px solid var(--color-divider)}
+.dv-opts{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px}
+.dv-oid{font:700 11px var(--font-heading);padding:3px 8px;background:color-mix(in srgb, var(--color-text) 10%, transparent);color:var(--color-text);text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 12px/1.3 var(--font-body);color:color-mix(in srgb, var(--color-text) 55%, transparent)}
+.dv-card{max-width:100%;background:var(--color-bg);border:2px solid var(--color-divider);box-shadow:var(--shadow-md);overflow:hidden}
+.dv-opt:target .dv-oid{background:var(--color-accent);color:var(--color-bg)}
+.dv-next{margin:28px 0 0;font:12px/1.6 var(--font-body);color:color-mix(in srgb, var(--color-text) 55%, transparent)}
+.dv-next a{color:var(--color-accent-700)}
+.mock-nav{display:flex;align-items:center;gap:32px;padding:16px 32px;border-bottom:2px solid var(--color-divider)}
+.mock-nav a{font-size:13px;color:inherit;text-decoration:none;padding-bottom:2px}
+.mock-nav a.active{color:var(--color-accent-700);border-bottom:2px solid var(--color-accent)}
+.mock-nav .spacer{flex:1}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid var(--color-divider);color:var(--color-text);cursor:pointer}
+.chg-pill{display:inline-flex;align-items:center;gap:4px;font:700 12px var(--font-heading);padding:2px 8px}
+.chg-pos{background:var(--color-accent-100);color:var(--color-accent-800)}
+.chg-neg{background:var(--color-neutral-200);color:var(--color-neutral-800)}
+.grid-cell{border-right:2px solid var(--color-divider)}
+.grid-cell:last-child{border-right:none}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">tonklasocute redesign — Modernist system, desktop</span></div>
+<p class="dv-tsub">A free stock watchlist &amp; alerts product. Flat, gridded, red-on-white — flush-left labels, 2px rules, zero radius. Dashboard and stock detail each get two structural directions; the rest run one strong version.</p>
+
+<div class="dv-group"><h6 class="dv-glabel">Auth</h6></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a"><div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Sign in</div>
+  <div class="dv-card" style="width:1200px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;min-height:640px">
+      <div style="padding:64px 56px;display:flex;flex-direction:column;justify-content:center;gap:28px;border-right:2px solid var(--color-divider)">
+        <div>
+          <div style="font:800 20px var(--font-heading);margin-bottom:6px">TONKLA</div>
+          <h1 style="font-size:34px;margin-bottom:8px">Welcome back</h1>
+          <p class="text-muted" style="font-size:14px">Sign in to your watchlist and alerts.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;max-width:380px">
+          <div class="field"><label>Email</label><input class="input" type="email" placeholder="you@example.com"></div>
+          <div class="field"><label>Password</label><input class="input" type="password" placeholder="········"></div>
+          <a href="#" style="font-size:12px;align-self:flex-start">Forgot password?</a>
+          <button class="btn btn-primary btn-block" style="justify-content:center">Sign In</button>
+          <p style="font-size:13px;text-align:center;margin:0">Don't have an account? <a href="#">Create an account</a></p>
+        </div>
+      </div>
+      <div style="padding:64px 56px;display:flex;flex-direction:column;justify-content:space-between;background:var(--color-surface)">
+        <div class="tag tag-outline" style="align-self:flex-start">MARKET OVERVIEW</div>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <div class="text-muted" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase">AAPL</div>
+          <div style="font:800 44px var(--font-heading)">$268.40</div>
+          <span class="chg-pill chg-pos"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>+1.8%</span>
+          <div style="margin-top:8px">{{ charts.signIn }}</div>
+        </div>
+        <p style="font-size:13px;max-width:340px;margin:0">ติดตามหุ้นที่ชอบ ตั้งแจ้งเตือนราคา ดูข้อมูลเชิงลึก — ฟรี ไม่มีค่าสมัครสมาชิก</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dv-opt" id="1b"><div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Sign up &amp; personalize</div>
+  <div class="dv-card" style="width:1200px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;min-height:760px">
+      <div style="padding:56px;border-right:2px solid var(--color-divider);overflow:auto">
+        <div style="font:800 20px var(--font-heading);margin-bottom:24px">TONKLA</div>
+        <h1 style="font-size:30px;margin-bottom:24px">Sign Up &amp; Personalize</h1>
+        <div style="display:flex;flex-direction:column;gap:16px;max-width:420px">
+          <div class="field"><label>Full Name</label><input class="input" placeholder="Jane Doe"></div>
+          <div class="field"><label>Email</label><input class="input" type="email" placeholder="you@example.com"></div>
+          <div class="field">
+            <label>Password</label><input class="input" type="password" placeholder="········">
+            <ul style="margin:8px 0 0;padding-left:18px;font-size:12px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">
+              <li>At least 8 characters</li><li>At least 1 uppercase letter</li><li>At least 1 lowercase letter</li><li>At least 1 number</li>
+            </ul>
+          </div>
+          <div class="field">
+            <label>Country</label>
+            <select class="input"><option>Thailand</option><option>India</option><option>United States</option></select>
+          </div>
+          <p style="font-size:12px;margin:-8px 0 0;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Helps us show market data and news relevant to you.</p>
+        </div>
+      </div>
+      <div style="padding:56px;background:var(--color-surface);display:flex;flex-direction:column;gap:28px">
+        <div>
+          <h4 style="margin-bottom:12px">Investment Goals</h4>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <label class="radio"><input type="radio" name="goal" checked><span class="dot"></span>Growth</label>
+            <label class="radio"><input type="radio" name="goal"><span class="dot"></span>Income</label>
+            <label class="radio"><input type="radio" name="goal"><span class="dot"></span>Preservation</label>
+          </div>
+        </div>
+        <div class="hr" style="margin:0"></div>
+        <div>
+          <h4 style="margin-bottom:12px">Risk Tolerance</h4>
+          <div class="seg">
+            <label class="seg-opt"><input type="radio" name="risk">Conservative</label>
+            <label class="seg-opt"><input type="radio" name="risk" checked>Balanced</label>
+            <label class="seg-opt"><input type="radio" name="risk">Aggressive</label>
+          </div>
+        </div>
+        <div class="hr" style="margin:0"></div>
+        <div>
+          <h4 style="margin-bottom:12px">Preferred Industry</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="tag tag-accent">Technology</span><span class="tag tag-accent">Finance</span>
+            <span class="tag tag-neutral">Healthcare</span><span class="tag tag-neutral">Energy</span>
+            <span class="tag tag-neutral">Retail</span><span class="tag tag-neutral">Industrials</span>
+          </div>
+        </div>
+        <button class="btn btn-primary" style="margin-top:auto;justify-content:center">Start Your Investing Journey</button>
+        <p style="font-size:13px;text-align:center;margin:0">Already have an account? <a href="#">Sign in</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="dv-group"><h6 class="dv-glabel">Dashboard — two directions</h6></div>
+<div class="dv-opts">
+<div class="dv-opt" id="1c"><div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Grid &amp; table — dense, data-forward</div>
+  <div class="dv-card" style="width:1480px">
+    <div class="mock-nav">
+      <span style="font:800 18px var(--font-heading)">TONKLA</span>
+      <a class="active" href="#">Dashboard</a><a href="#">Watchlist</a><a href="#">Alerts</a>
+      <span class="spacer"></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+    </div>
+    <div style="padding:32px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px">
+        <h2 style="margin:0">Market Overview</h2>
+        <span class="text-muted" style="font-size:12px">Updated 2 min ago</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);border:2px solid var(--color-divider);margin-bottom:32px">
+        <sc-for list="{{ indices }}" as="ix" hint-placeholder-count="4">
+          <div class="grid-cell" style="padding:18px">
+            <div class="text-muted" style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">{{ ix.name }}</div>
+            <div style="font:800 22px var(--font-heading);margin-bottom:4px">{{ ix.price }}</div>
+            <span class="chg-pill {{ ix.chgClass }}">{{ ix.arrow }}{{ ix.chgText }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px">
+        <h3 style="margin:0">Your Watchlist</h3>
+        <button class="btn btn-secondary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add symbol</button>
+      </div>
+      <table class="table">
+        <thead><tr><th>Symbol</th><th>Sector</th><th>Price</th><th>Change</th><th>7D</th><th></th></tr></thead>
+        <tbody>
+          <sc-for list="{{ watchlistRows }}" as="s" hint-placeholder-count="6">
+            <tr>
+              <td><strong>{{ s.sym }}</strong><div class="text-muted" style="font-size:12px">{{ s.name }}</div></td>
+              <td><span class="tag tag-neutral">{{ s.sector }}</span></td>
+              <td>${{ s.price }}</td>
+              <td><span class="chg-pill {{ s.chgClass }}">{{ s.arrow }}{{ s.chgText }}</span></td>
+              <td>{{ s.sparkEl }}</td>
+              <td style="text-align:right"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="dv-opts" style="margin-top:32px">
+<div class="dv-opt" id="1d"><div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Chart-led — a featured index chart up top</div>
+  <div class="dv-card" style="width:1480px">
+    <div class="mock-nav">
+      <span style="font:800 18px var(--font-heading)">TONKLA</span>
+      <a class="active" href="#">Dashboard</a><a href="#">Watchlist</a><a href="#">Alerts</a>
+      <span class="spacer"></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+    </div>
+    <div style="padding:32px">
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:0;border:2px solid var(--color-divider);margin-bottom:32px">
+        <div style="padding:28px;border-right:2px solid var(--color-divider)">
+          <div class="text-muted" style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">SET Index</div>
+          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:16px">
+            <span style="font:800 40px var(--font-heading)">1,412.6</span>
+            <span class="chg-pill chg-pos"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>+0.9%</span>
+          </div>
+          {{ charts.dashboardHero }}
+        </div>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ indicesRest }}" as="ix" hint-placeholder-count="3">
+            <div style="padding:18px 24px;border-bottom:2px solid var(--color-divider);display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font:600 13px var(--font-heading)">{{ ix.name }}</div>
+                <div style="font-size:12px" class="text-muted">{{ ix.price }}</div>
+              </div>
+              <span class="chg-pill {{ ix.chgClass }}">{{ ix.arrow }}{{ ix.chgText }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:32px">
+        <div>
+          <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px">
+            <h3 style="margin:0">Watchlist</h3>
+            <button class="btn btn-ghost">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          </div>
+          <div style="display:flex;flex-direction:column">
+            <sc-for list="{{ watchlistTop4 }}" as="s" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--color-divider)">
+                <div style="display:flex;align-items:center;gap:12px">
+                  {{ s.sparkElSmall }}
+                  <div><strong>{{ s.sym }}</strong><div class="text-muted" style="font-size:12px">{{ s.name }}</div></div>
+                </div>
+                <div style="text-align:right">
+                  <div>${{ s.price }}</div>
+                  <span class="chg-pill {{ s.chgClass }}">{{ s.arrow }}{{ s.chgText }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div class="card elev-sm">
+          <div class="card-kicker">Alerts</div>
+          <div class="card-title">3 active alerts</div>
+          <p class="card-body">AAPL above $275, TSLA below $390, and one more triggered today.</p>
+          <button class="btn btn-secondary">Manage alerts</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="dv-group"><h6 class="dv-glabel">Stock detail — two directions</h6></div>
+<div class="dv-opts">
+<div class="dv-opt" id="1e"><div class="dv-olabel"><a class="dv-oid" href="#1e">1e</a>Full-width — tabs below a big chart</div>
+  <div class="dv-card" style="width:1480px">
+    <div class="mock-nav">
+      <span style="font:800 18px var(--font-heading)">TONKLA</span>
+      <a href="#">Dashboard</a><a class="active" href="#">Watchlist</a><a href="#">Alerts</a>
+      <span class="spacer"></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+    </div>
+    <div style="padding:32px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px">
+        <div>
+          <div class="text-muted" style="font-size:12px;margin-bottom:4px">NASDAQ · AAPL</div>
+          <h1 style="margin-bottom:8px">Apple Inc.</h1>
+          <div style="display:flex;align-items:baseline;gap:12px">
+            <span style="font:800 32px var(--font-heading)">$268.40</span>
+            <span class="chg-pill chg-pos"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>+1.8%</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-secondary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Watchlist</button>
+          <button class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg> Set alert</button>
+        </div>
+      </div>
+      {{ charts.stockA }}
+      <div class="mock-nav" style="padding:0;border-bottom:2px solid var(--color-divider);margin-top:24px">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+          <a class="{{ t.activeClass }}" href="#" style="padding:14px 0">{{ t.label }}</a>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);border:2px solid var(--color-divider);border-top:none">
+        <sc-for list="{{ statsA }}" as="kv" hint-placeholder-count="6">
+          <div class="grid-cell" style="padding:16px">
+            <div class="text-muted" style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">{{ kv.label }}</div>
+            <div style="font:600 16px var(--font-heading)">{{ kv.value }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="dv-opts" style="margin-top:32px">
+<div class="dv-opt" id="1f"><div class="dv-olabel"><a class="dv-oid" href="#1f">1f</a>Split — chart + sidebar with alert &amp; news</div>
+  <div class="dv-card" style="width:1480px">
+    <div class="mock-nav">
+      <span style="font:800 18px var(--font-heading)">TONKLA</span>
+      <a href="#">Dashboard</a><a class="active" href="#">Watchlist</a><a href="#">Alerts</a>
+      <span class="spacer"></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+    </div>
+    <div style="padding:32px;display:grid;grid-template-columns:2fr 1fr;gap:0;border:2px solid var(--color-divider)">
+      <div style="padding:28px;border-right:2px solid var(--color-divider)">
+        <div class="text-muted" style="font-size:12px;margin-bottom:4px">NASDAQ · AAPL</div>
+        <h1 style="margin-bottom:8px">Apple Inc.</h1>
+        <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:20px">
+          <span style="font:800 32px var(--font-heading)">$268.40</span>
+          <span class="chg-pill chg-pos"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>+1.8%</span>
+        </div>
+        {{ charts.stockB }}
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);margin-top:24px;border-top:2px solid var(--color-divider)">
+          <sc-for list="{{ statsB }}" as="kv" hint-placeholder-count="4">
+            <div class="grid-cell" style="padding:14px 0">
+              <div class="text-muted" style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">{{ kv.label }}</div>
+              <div style="font:600 15px var(--font-heading)">{{ kv.value }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="padding:28px;display:flex;flex-direction:column;gap:24px">
+        <div class="card elev-sm">
+          <div class="card-kicker">Price alert</div>
+          <div class="card-title">Notify me when AAPL...</div>
+          <div class="seg" style="margin-top:6px">
+            <label class="seg-opt"><input type="radio" name="cond" checked>Above</label>
+            <label class="seg-opt"><input type="radio" name="cond">Below</label>
+          </div>
+          <input class="input" placeholder="$275.00" style="margin-top:10px">
+          <button class="btn btn-primary" style="margin-top:6px;justify-content:center">Create alert</button>
+        </div>
+        <div>
+          <h5 style="margin-bottom:12px">Related</h5>
+          <sc-for list="{{ relatedStocks }}" as="s" hint-placeholder-count="3">
+            <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--color-divider)">
+              <strong>{{ s.sym }}</strong><span class="chg-pill {{ s.chgClass }}">{{ s.arrow }}{{ s.chgText }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div>
+          <h5 style="margin-bottom:12px">News</h5>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <sc-for list="{{ newsItems }}" as="n" hint-placeholder-count="3">
+              <div>
+                <div style="font-size:13px;line-height:1.4;margin-bottom:4px">{{ n.title }}</div>
+                <div class="text-muted" style="font-size:11px">{{ n.src }} · {{ n.time }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="dv-group"><h6 class="dv-glabel">Watchlist &amp; alerts</h6></div>
+<div class="dv-opts">
+<div class="dv-opt" id="1g"><div class="dv-olabel"><a class="dv-oid" href="#1g">1g</a>Watchlist</div>
+  <div class="dv-card" style="width:1480px">
+    <div class="mock-nav">
+      <span style="font:800 18px var(--font-heading)">TONKLA</span>
+      <a href="#">Dashboard</a><a class="active" href="#">Watchlist</a><a href="#">Alerts</a>
+      <span class="spacer"></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+    </div>
+    <div style="padding:32px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px">
+        <h2 style="margin:0">Watchlist</h2>
+        <div style="display:flex;gap:10px;align-items:center">
+          <div class="field" style="width:220px;margin:0"><input class="input" placeholder="Search symbol"></div>
+          <div class="seg">
+            <label class="seg-opt"><input type="radio" name="filt" checked>All</label>
+            <label class="seg-opt"><input type="radio" name="filt">Gainers</label>
+            <label class="seg-opt"><input type="radio" name="filt">Losers</label>
+          </div>
+          <button class="btn btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add symbol</button>
+        </div>
+      </div>
+      <table class="table">
+        <thead><tr><th>Symbol</th><th>Sector</th><th>Price</th><th>Change</th><th>7D trend</th><th>Alert</th><th></th></tr></thead>
+        <tbody>
+          <sc-for list="{{ watchlistRows }}" as="s" hint-placeholder-count="6">
+            <tr>
+              <td><strong>{{ s.sym }}</strong><div class="text-muted" style="font-size:12px">{{ s.name }}</div></td>
+              <td><span class="tag tag-neutral">{{ s.sector }}</span></td>
+              <td>${{ s.price }}</td>
+              <td><span class="chg-pill {{ s.chgClass }}">{{ s.arrow }}{{ s.chgText }}</span></td>
+              <td>{{ s.sparkEl }}</td>
+              <td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></td>
+              <td style="text-align:right"><span class="icon-btn" style="border:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></span></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="dv-opts" style="margin-top:32px">
+<div class="dv-opt" id="1h"><div class="dv-olabel"><a class="dv-oid" href="#1h">1h</a>Price alerts — with the create-alert dialog open</div>
+  <div class="dv-card" style="width:1480px;position:relative">
+    <div class="mock-nav">
+      <span style="font:800 18px var(--font-heading)">TONKLA</span>
+      <a href="#">Dashboard</a><a href="#">Watchlist</a><a class="active" href="#">Alerts</a>
+      <span class="spacer"></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></span>
+      <span class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+    </div>
+    <div style="padding:32px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px">
+        <h2 style="margin:0">Price Alerts</h2>
+        <button class="btn btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> New alert</button>
+      </div>
+      <table class="table">
+        <thead><tr><th>Symbol</th><th>Condition</th><th>Target</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          <sc-for list="{{ alertsRows }}" as="a" hint-placeholder-count="4">
+            <tr>
+              <td><strong>{{ a.sym }}</strong></td>
+              <td>{{ a.cond }}</td>
+              <td>{{ a.target }}</td>
+              <td><span class="tag {{ a.statusClass }}">{{ a.status }}</span></td>
+              <td style="text-align:right"><span class="icon-btn" style="border:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></span></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+    <div class="dialog-backdrop" style="position:absolute;inset:0">
+      <div class="dialog">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div class="dialog-title">New price alert</div>
+          <span style="cursor:pointer;color:var(--color-text)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+        </div>
+        <div class="field"><label>Symbol</label><input class="input" value="AAPL"></div>
+        <div class="field">
+          <label>Condition</label>
+          <div class="seg" style="width:100%">
+            <label class="seg-opt" style="flex:1;justify-content:center"><input type="radio" name="ncond" checked>Above</label>
+            <label class="seg-opt" style="flex:1;justify-content:center"><input type="radio" name="ncond">Below</label>
+          </div>
+        </div>
+        <div class="field"><label>Target price</label><input class="input" placeholder="$275.00"></div>
+        <div class="dialog-actions">
+          <button class="btn btn-secondary">Cancel</button>
+          <button class="btn btn-primary">Create alert</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<p class="dv-next">Try next: "make <a href="#1d">1d</a> the dashboard everywhere" · "combine <a href="#1f">1f</a>'s sidebar into <a href="#1c">1c</a>" · "mobile versions of these"</p>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  arrow(pos){
+    return pos
+      ? React.createElement('svg',{width:12,height:12,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor',strokeWidth:2.5,strokeLinecap:'round',strokeLinejoin:'round'},
+          React.createElement('line',{x1:7,y1:17,x2:17,y2:7}),React.createElement('polyline',{points:'7 7 17 7 17 17'}))
+      : React.createElement('svg',{width:12,height:12,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor',strokeWidth:2.5,strokeLinecap:'round',strokeLinejoin:'round'},
+          React.createElement('line',{x1:7,y1:7,x2:17,y2:17}),React.createElement('polyline',{points:'17 7 17 17 7 17'}));
+  }
+
+  sparkline(points, w, h, pos){
+    var max = Math.max.apply(null, points), min = Math.min.apply(null, points);
+    var step = w / (points.length - 1);
+    var pts = points.map(function(p, i){
+      return (i * step).toFixed(1) + ',' + (h - ((p - min) / ((max - min) || 1)) * h).toFixed(1);
+    }).join(' ');
+    var color = pos ? 'var(--color-accent-700)' : 'var(--color-neutral-600)';
+    return React.createElement('svg',{width:w,height:h,viewBox:'0 0 ' + w + ' ' + h,style:{display:'block'}},
+      React.createElement('polyline',{points:pts,fill:'none',stroke:color,strokeWidth:2}));
+  }
+
+  bigChart(w, h, pos){
+    var points = [40,52,48,60,55,70,66,80,74,90,86,96];
+    var max = Math.max.apply(null, points), min = Math.min.apply(null, points);
+    var step = w / (points.length - 1);
+    var pts = points.map(function(p, i){
+      return (i * step).toFixed(1) + ',' + (h - ((p - min) / (max - min)) * h * 0.85 - h * 0.1).toFixed(1);
+    }).join(' ');
+    var color = pos ? '#ec3013' : '#605d5d';
+    var areaPts = '0,' + h + ' ' + pts + ' ' + w + ',' + h;
+    return React.createElement('svg',{width:w,height:h,viewBox:'0 0 ' + w + ' ' + h,style:{display:'block'}},
+      React.createElement('polygon',{points:areaPts,fill:color,opacity:0.06}),
+      React.createElement('polyline',{points:pts,fill:'none',stroke:color,strokeWidth:2.5}));
+  }
+
+  row(sym, name, price, chgText, pos, sector, spark){
+    var self = this;
+    return {
+      sym: sym, name: name, price: price, chgText: chgText, sector: sector,
+      chgClass: pos ? 'chg-pos' : 'chg-neg',
+      arrow: self.arrow(pos),
+      sparkEl: spark ? self.sparkline(spark, 80, 28, pos) : null,
+      sparkElSmall: spark ? self.sparkline(spark, 56, 22, pos) : null
+    };
+  }
+
+  renderVals(){
+    var self = this;
+    var indices = [
+      self.row(null,'SET Index','1,412.6','+0.9%',true),
+      self.row(null,'S&P 500','6,842.1','+0.4%',true),
+      self.row(null,'Nasdaq','22,918','-0.6%',false),
+      self.row(null,'Nikkei 225','39,204','+1.2%',true)
+    ];
+    var watchlistRows = [
+      self.row('AAPL','Apple Inc.','268.40','+1.8%',true,'Tech',[40,44,42,48,46,52,55,58,60,64]),
+      self.row('NVDA','NVIDIA Corp.','184.22','+3.2%',true,'Tech',[30,34,38,36,44,48,52,56,60,66]),
+      self.row('TSLA','Tesla Inc.','412.90','-2.1%',false,'Auto',[60,58,54,56,50,48,44,42,38,36]),
+      self.row('MSFT','Microsoft Corp.','521.10','+0.5%',true,'Tech',[45,46,44,48,47,50,52,51,54,56]),
+      self.row('AMZN','Amazon.com','238.75','-0.3%',false,'Retail',[50,49,51,48,50,47,46,48,45,44]),
+      self.row('JPM','JPMorgan Chase','298.60','+0.8%',true,'Finance',[38,40,39,42,44,43,46,48,47,50])
+    ];
+    var alertsRows = [
+      {sym:'AAPL', cond:'Price above', target:'$275.00', status:'Active', statusClass:'tag-accent'},
+      {sym:'TSLA', cond:'Price below', target:'$390.00', status:'Active', statusClass:'tag-accent'},
+      {sym:'NVDA', cond:'Change exceeds', target:'+5% in 1 day', status:'Paused', statusClass:'tag-neutral'},
+      {sym:'MSFT', cond:'Price above', target:'$540.00', status:'Triggered', statusClass:'tag-outline'}
+    ];
+    var newsItems = [
+      {src:'Reuters', title:'Apple supplier orders point to strong iPhone demand', time:'2h ago'},
+      {src:'Bloomberg', title:'Fed signals steady rates through year end', time:'5h ago'},
+      {src:'CNBC', title:'Chipmakers rally on AI capex guidance', time:'1d ago'}
+    ];
+    var statsA = [['Open','$266.80'],['High','$269.90'],['Low','$265.10'],['Volume','48.2M'],['Mkt Cap','$4.1T'],['P/E Ratio','31.4']].map(function(kv){ return {label:kv[0], value:kv[1]}; });
+    var statsB = [['Open','$266.80'],['High','$269.90'],['Low','$265.10'],['Volume','48.2M']].map(function(kv){ return {label:kv[0], value:kv[1]}; });
+    var tabs = ['Overview','News','Financials','Peers'].map(function(t,i){ return {label:t, activeClass: i===0 ? 'active' : ''}; });
+    var relatedStocks = watchlistRows.slice(1,4).map(function(s){ return {sym:s.sym, chgClass:s.chgClass, arrow:s.arrow, chgText:s.chgText}; });
+
+    return {
+      indices: indices,
+      indicesRest: indices.slice(1),
+      watchlistRows: watchlistRows,
+      watchlistTop4: watchlistRows.slice(0,4),
+      alertsRows: alertsRows,
+      newsItems: newsItems,
+      statsA: statsA,
+      statsB: statsB,
+      tabs: tabs,
+      relatedStocks: relatedStocks,
+      charts: {
+        signIn: self.bigChart(420,140,true),
+        dashboardHero: self.bigChart(720,220,true),
+        stockA: self.bigChart(1416,260,true),
+        stockB: self.bigChart(880,240,true)
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>
