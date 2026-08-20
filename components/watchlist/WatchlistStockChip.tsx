@@ -9,9 +9,12 @@ import CreateAlertModal from "./CreateAlertModal";
 interface WatchlistStockChipProps {
     symbol: string;
     userId: string;
+    alerts: any[];
+    lineConnected: boolean;
 }
 
-export default function WatchlistStockChip({ symbol, userId }: WatchlistStockChipProps) {
+export default function WatchlistStockChip({ symbol, userId, alerts, lineConnected }: WatchlistStockChipProps) {
+    const hasAlerts = alerts.length > 0;
     const [price, setPrice] = useState<number>(0);
     const [modalOpen, setModalOpen] = useState(false);
     const [loadingPrice, setLoadingPrice] = useState(false);
@@ -51,11 +54,15 @@ export default function WatchlistStockChip({ symbol, userId }: WatchlistStockChi
             {/* Alert Button */}
             <button
                 onClick={handleBellClick}
-                className="text-gray-400 hover:text-teal-500 transition-colors p-0.5"
-                title="Create Alert"
+                className={`transition-colors p-0.5 ${hasAlerts ? 'text-teal-500' : 'text-gray-400 hover:text-teal-500'}`}
+                title={hasAlerts ? 'Manage Alerts' : 'Create Alert'}
                 disabled={loadingPrice}
             >
-                {loadingPrice ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Bell className="w-3.5 h-3.5" />}
+                {loadingPrice ? (
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                ) : (
+                    <Bell className="w-3.5 h-3.5" fill={hasAlerts ? 'currentColor' : 'none'} />
+                )}
             </button>
 
             {/* Remove Button */}
@@ -69,6 +76,8 @@ export default function WatchlistStockChip({ symbol, userId }: WatchlistStockChi
                 userId={userId}
                 symbol={symbol}
                 currentPrice={price}
+                existingAlerts={alerts}
+                lineConnected={lineConnected}
                 open={modalOpen}
                 onOpenChange={setModalOpen}
             />

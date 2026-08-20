@@ -7,7 +7,6 @@ import { getUserAlerts } from '@/lib/actions/alert.actions';
 import { getNews } from '@/lib/actions/finnhub.actions';
 import { getLineLinkStatus } from '@/lib/actions/line.actions';
 import WatchlistManager from '@/components/watchlist/WatchlistManager';
-import AlertsPanel from '@/components/watchlist/AlertsPanel';
 import NewsGrid from '@/components/watchlist/NewsGrid';
 import SearchCommand from '@/components/SearchCommand';
 import { Loader2 } from 'lucide-react';
@@ -51,23 +50,18 @@ export default async function WatchlistPage() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                {/* Main Content - Watchlist Table */}
-                <div className="lg:col-span-3 space-y-8">
-                    <div className="space-y-6">
-                        <WatchlistManager initialItems={watchlistItems} userId={userId} />
-                    </div>
+            <div className="space-y-8">
+                <WatchlistManager
+                    initialItems={watchlistItems}
+                    userId={userId}
+                    alerts={alerts}
+                    lineConnected={lineStatus.connected}
+                />
 
-                    {/* News Section */}
-                    <Suspense fallback={<div className="flex justify-center p-12"><Loader2 className="animate-spin text-gray-500" /></div>}>
-                        <NewsGrid news={relevantNews || []} />
-                    </Suspense>
-                </div>
-
-                {/* Sidebar - Alerts */}
-                <div className="lg:col-span-1">
-                    <AlertsPanel alerts={alerts} userId={userId} lineConnected={lineStatus.connected} />
-                </div>
+                {/* News Section */}
+                <Suspense fallback={<div className="flex justify-center p-12"><Loader2 className="animate-spin text-gray-500" /></div>}>
+                    <NewsGrid news={relevantNews || []} />
+                </Suspense>
             </div>
         </div>
     );

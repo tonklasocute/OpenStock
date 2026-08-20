@@ -11,6 +11,8 @@ import { filterWatchlist, type WatchlistFilter } from '@/lib/filterWatchlist';
 interface WatchlistManagerProps {
     initialItems: WatchlistItem[]; // Using the DB model type directly or a simplified version
     userId: string;
+    alerts: any[];
+    lineConnected: boolean;
 }
 
 const FILTER_OPTIONS: { value: WatchlistFilter; label: string }[] = [
@@ -19,7 +21,7 @@ const FILTER_OPTIONS: { value: WatchlistFilter; label: string }[] = [
     { value: 'losers', label: 'Losers' },
 ];
 
-export default function WatchlistManager({ initialItems, userId }: WatchlistManagerProps) {
+export default function WatchlistManager({ initialItems, userId, alerts, lineConnected }: WatchlistManagerProps) {
     // Sort state: 'asc' (A-Z), 'desc' (Z-A), or null (added order/default)
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
     const [filter, setFilter] = useState<WatchlistFilter>('all');
@@ -54,6 +56,16 @@ export default function WatchlistManager({ initialItems, userId }: WatchlistMana
     );
 
     const watchlistSymbols = filteredItems.map((item) => item.symbol);
+
+    const alertsBySymbol = useMemo(() => {
+        const map = new Map<string, any[]>();
+        for (const alert of alerts) {
+            const list = map.get(alert.symbol) ?? [];
+            list.push(alert);
+            map.set(alert.symbol, list);
+        }
+        return map;
+    }, [alerts]);
 
     return (
         <div className="space-y-6">
@@ -117,6 +129,8 @@ export default function WatchlistManager({ initialItems, userId }: WatchlistMana
                                 key={item.symbol}
                                 symbol={item.symbol}
                                 userId={userId}
+                                alerts={alertsBySymbol.get(item.symbol) ?? []}
+                                lineConnected={lineConnected}
                             />
                         ))}
                     </div>

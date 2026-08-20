@@ -1,18 +1,25 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { createAlert } from "@/lib/actions/alert.actions";
+import { Trash2 } from "lucide-react";
+import { createAlert, deleteAlert } from "@/lib/actions/alert.actions";
+import { getAlertStatus } from "@/lib/getAlertStatus";
+import { formatCurrency } from "@/lib/utils";
 import { toast } from "sonner"; // Assuming sonner is available or use existing toast
+import ConnectLineCard from "./ConnectLineCard";
 
 interface CreateAlertModalProps {
     userId: string;
     symbol: string;
     currentPrice: number;
     companyName?: string; // Optional prop for better display
+    existingAlerts?: any[];
+    lineConnected?: boolean;
     onAlertCreated?: () => void;
     children?: React.ReactNode;
     // Controlled props
@@ -25,11 +32,14 @@ export default function CreateAlertModal({
     symbol,
     currentPrice,
     companyName = "",
+    existingAlerts = [],
+    lineConnected = true,
     onAlertCreated,
     children,
     open: controlledOpen,
     onOpenChange: setControlledOpen
 }: CreateAlertModalProps) {
+    const router = useRouter();
     const [internalOpen, setInternalOpen] = useState(false);
 
     const isControlled = controlledOpen !== undefined;
@@ -67,6 +77,17 @@ export default function CreateAlertModal({
         }
     };
 
+    const handleDeleteAlert = async (alertId: string) => {
+        try {
+            await deleteAlert(alertId);
+            toast.success("Alert deleted");
+            router.refresh();
+        } catch (error) {
+            console.error(error);
+            toast.error("Failed to delete alert");
+        }
+    };
+
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             {children && (
@@ -78,6 +99,39 @@ export default function CreateAlertModal({
                 <DialogHeader>
                     <DialogTitle className="text-2xl font-extrabold tracking-tight text-gray-100 mb-2">Price Alert</DialogTitle>
                 </DialogHeader>
+
+                {existingAlerts.length > 0 && (
+                    <div className="space-y-2 pb-2">
+                        {existingAlerts.map((alert) => {
+                            const status = getAlertStatus(alert);
+                            const statusTagClass =
+                                status === 'active' ? 'tag-accent' : status === 'triggered' ? 'tag-outline' : 'tag-neutral';
+                            return (
+                                <div
+                                    key={alert._id}
+                                    className="flex items-center justify-between bg-gray-900 border border-gray-600 px-3 py-2 text-sm"
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <span className={`tag ${statusTagClass}`}>{status}</span>
+                                        <span className="text-gray-300">
+                                            {alert.condition.toLowerCase()} {formatCurrency(alert.targetPrice)}
+                                        </span>
+                                    </div>
+                                    <button
+                                        onClick={() => handleDeleteAlert(alert._id)}
+                                        className="text-gray-500 hover:text-teal-500 transition-colors p-1"
+                                        title="Delete alert"
+                                    >
+                                        <Trash2 className="w-4 h-4" />
+                                    </button>
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
+
+                {!lineConnected && <ConnectLineCard userId={userId} initiallyConnected={false} />}
+
                 <form onSubmit={handleSubmit} className="space-y-5 py-2 relative z-10">
 
                     {/* Alert Name */}
