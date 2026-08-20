@@ -3,7 +3,9 @@
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import InputField from "@/components/forms/InputField";
-import SelectField from "@/components/forms/SelectField";
+import RadioGroupField from "@/components/forms/RadioGroupField";
+import SegmentedField from "@/components/forms/SegmentedField";
+import TagChipField from "@/components/forms/TagChipField";
 import PasswordRequirements from "@/components/forms/PasswordRequirements";
 import { INVESTMENT_GOALS, PASSWORD_VALIDATION, PREFERRED_INDUSTRIES, RISK_TOLERANCE_OPTIONS } from "@/lib/constants";
 import { CountrySelectField } from "@/components/forms/CountrySelectField";
@@ -102,30 +104,27 @@ const SignUp = () => {
                     required
                 />
 
-                <SelectField
+                <RadioGroupField
                     name="investmentGoals"
                     label="Investment Goals"
-                    placeholder="Select your investment goal"
                     options={INVESTMENT_GOALS}
                     control={control}
                     error={errors.investmentGoals}
                     required
                 />
 
-                <SelectField
+                <SegmentedField
                     name="riskTolerance"
                     label="Risk Tolerance"
-                    placeholder="Select your risk level"
                     options={RISK_TOLERANCE_OPTIONS}
                     control={control}
                     error={errors.riskTolerance}
                     required
                 />
 
-                <SelectField
+                <TagChipField
                     name="preferredIndustry"
                     label="Preferred Industry"
-                    placeholder="Select your preferred industry"
                     options={PREFERRED_INDUSTRIES}
                     control={control}
                     error={errors.preferredIndustry}

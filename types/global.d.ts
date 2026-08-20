@@ -49,6 +49,18 @@ declare global {
         required?: boolean;
     };
 
+    type RadioGroupFieldProps = {
+        name: string;
+        label: string;
+        options: readonly Option[];
+        control: Control;
+        error?: FieldError;
+        required?: boolean;
+    };
+
+    type SegmentedFieldProps = RadioGroupFieldProps;
+    type TagChipFieldProps = RadioGroupFieldProps;
+
     type FooterLinkProps = {
         text: string;
         linkText: string;
