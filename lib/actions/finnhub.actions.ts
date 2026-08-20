@@ -11,6 +11,10 @@ type FinnhubQuote = {
     c?: number;
     d?: number;
     dp?: number;
+    o?: number;
+    h?: number;
+    l?: number;
+    pc?: number;
 };
 
 type FinnhubCompanyProfile = {
@@ -112,6 +116,10 @@ export async function getWatchlistData(symbols: string[]) {
                     price: quote?.c || 0,
                     change: quote?.d || 0,
                     changePercent: quote?.dp || 0,
+                    open: quote?.o || 0,
+                    high: quote?.h || 0,
+                    low: quote?.l || 0,
+                    previousClose: quote?.pc || 0,
                     currency: profile?.currency || 'USD',
                     name: profile?.name || sym,
                     logo: profile?.logo,

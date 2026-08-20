@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import WatchlistStockChip from './WatchlistStockChip';
-import TradingViewWatchlist from './TradingViewWatchlist';
+import WatchlistTable from './WatchlistTable';
 import { Button } from '@/components/ui/button';
 import { ArrowDownAZ, ArrowUpZA, ArrowUpDown } from 'lucide-react';
 import { WatchlistItem } from '@/database/models/watchlist.model';
@@ -13,6 +13,7 @@ interface WatchlistManagerProps {
     userId: string;
     alerts: any[];
     lineConnected: boolean;
+    priceData: any[];
 }
 
 const FILTER_OPTIONS: { value: WatchlistFilter; label: string }[] = [
@@ -21,14 +22,19 @@ const FILTER_OPTIONS: { value: WatchlistFilter; label: string }[] = [
     { value: 'losers', label: 'Losers' },
 ];
 
-export default function WatchlistManager({ initialItems, userId, alerts, lineConnected }: WatchlistManagerProps) {
+export default function WatchlistManager({ initialItems, userId, alerts, lineConnected, priceData }: WatchlistManagerProps) {
     // Sort state: 'asc' (A-Z), 'desc' (Z-A), or null (added order/default)
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | null>(null);
     const [filter, setFilter] = useState<WatchlistFilter>('all');
 
-    // WatchlistItem has no changePercent field today, so the Gainers/Losers
-    // filter has nothing to filter on and must stay hidden until it does.
-    const hasChangeData = initialItems.some(
+    const priceMap = useMemo(() => new Map(priceData.map((p) => [p.symbol, p])), [priceData]);
+
+    const itemsWithPrice = useMemo(
+        () => initialItems.map((item) => ({ ...item, ...priceMap.get(item.symbol) })),
+        [initialItems, priceMap]
+    );
+
+    const hasChangeData = itemsWithPrice.some(
         (item: any) => typeof item.changePercent === 'number'
     );
 
@@ -39,16 +45,16 @@ export default function WatchlistManager({ initialItems, userId, alerts, lineCon
     };
 
     const sortedItems = useMemo(() => {
-        if (!sortOrder) return initialItems;
+        if (!sortOrder) return itemsWithPrice;
 
-        return [...initialItems].sort((a, b) => {
+        return [...itemsWithPrice].sort((a, b) => {
             if (sortOrder === 'asc') {
                 return a.symbol.localeCompare(b.symbol);
             } else {
                 return b.symbol.localeCompare(a.symbol);
             }
         });
-    }, [initialItems, sortOrder]);
+    }, [itemsWithPrice, sortOrder]);
 
     const filteredItems = useMemo(
         () => filterWatchlist(sortedItems, filter),
@@ -139,9 +145,7 @@ export default function WatchlistManager({ initialItems, userId, alerts, lineCon
                 )}
             </div>
 
-            <div className="min-h-[550px]">
-                <TradingViewWatchlist symbols={watchlistSymbols} />
-            </div>
+            <WatchlistTable data={filteredItems} />
         </div>
     );
 }

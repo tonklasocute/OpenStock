@@ -4,7 +4,7 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getUserWatchlist } from '@/lib/actions/watchlist.actions';
 import { getUserAlerts } from '@/lib/actions/alert.actions';
-import { getNews } from '@/lib/actions/finnhub.actions';
+import { getNews, getWatchlistData } from '@/lib/actions/finnhub.actions';
 import { getLineLinkStatus } from '@/lib/actions/line.actions';
 import WatchlistManager from '@/components/watchlist/WatchlistManager';
 import NewsGrid from '@/components/watchlist/NewsGrid';
@@ -33,7 +33,10 @@ export default async function WatchlistPage() {
     const watchlistSymbols = watchlistItems.map((item: any) => item.symbol);
 
     // Fallback news if watchlist has items
-    const relevantNews = watchlistSymbols.length > 0 ? await getNews(watchlistSymbols) : news;
+    const [relevantNews, priceData] = await Promise.all([
+        watchlistSymbols.length > 0 ? getNews(watchlistSymbols) : Promise.resolve(news),
+        getWatchlistData(watchlistSymbols)
+    ]);
 
     return (
         <div className="min-h-screen bg-gray-900 text-gray-100 p-6 md:p-8">
@@ -56,6 +59,7 @@ export default async function WatchlistPage() {
                     userId={userId}
                     alerts={alerts}
                     lineConnected={lineStatus.connected}
+                    priceData={priceData}
                 />
 
                 {/* News Section */}

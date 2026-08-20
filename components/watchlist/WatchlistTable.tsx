@@ -1,25 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { ChevronUp, ChevronDown, Bell } from "lucide-react";
-import CreateAlertModal from "./CreateAlertModal";
-import WatchlistButton from "@/components/WatchlistButton";
-import { formatCurrency, formatNumber } from "@/lib/utils";
-import { removeFromWatchlist } from "@/lib/actions/watchlist.actions";
+import { formatCurrency, getChangeColorClass } from "@/lib/utils";
 
 interface WatchlistTableProps {
     data: any[];
-    userId: string;
-    onRefresh?: () => void;
 }
 
-export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTableProps) {
+export default function WatchlistTable({ data }: WatchlistTableProps) {
     const [stocks, setStocks] = useState(data);
 
     useEffect(() => {
-        // Initial set if prop changes
         setStocks(data);
     }, [data]);
 
@@ -32,7 +23,6 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
                 const symbols = stocks.map(s => s.symbol);
                 if (symbols.length === 0) return;
 
-                // Dynamic import to avoid server-action issues if directly imported in client component sometimes
                 const { getWatchlistData } = await import('@/lib/actions/finnhub.actions');
                 const updatedData = await getWatchlistData(symbols);
 
@@ -47,6 +37,10 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
                                     price: fresh.price,
                                     change: fresh.change,
                                     changePercent: fresh.changePercent,
+                                    open: fresh.open,
+                                    high: fresh.high,
+                                    low: fresh.low,
+                                    previousClose: fresh.previousClose,
                                 };
                             }
                             return existing;
@@ -56,10 +50,10 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
             } catch (err) {
                 console.error("Failed to poll watchlist prices", err);
             }
-        }, 5000);
+        }, 15000);
 
         return () => clearInterval(interval);
-    }, [stocks]); // Re-create interval if list size changes
+    }, [stocks]);
 
     if (!stocks || stocks.length === 0) {
         return (
@@ -71,93 +65,37 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
     }
 
     return (
-        <div className="overflow-hidden rounded-none border border-gray-600 bg-gray-800">
+        <div className="overflow-x-auto rounded-none border border-gray-600 bg-gray-800">
             <table className="w-full text-left text-sm border-collapse">
                 <thead className="bg-transparent text-gray-500 font-normal border-b-2 border-gray-600">
                     <tr>
-                        <th className="px-6 py-4 font-semibold tracking-wide">Company</th>
-                        <th className="px-6 py-4 font-semibold tracking-wide">Symbol</th>
-                        <th className="px-6 py-4 font-semibold tracking-wide">Price</th>
-                        <th className="px-6 py-4 font-semibold tracking-wide">Change</th>
-                        <th className="px-6 py-4 font-semibold tracking-wide">Market Cap</th>
-                        <th className="px-6 py-4 text-right font-semibold tracking-wide">Actions</th>
+                        <th className="px-4 py-3 font-semibold tracking-wide">Name</th>
+                        <th className="px-4 py-3 font-semibold tracking-wide text-right">Value</th>
+                        <th className="px-4 py-3 font-semibold tracking-wide text-right">Change</th>
+                        <th className="px-4 py-3 font-semibold tracking-wide text-right">Chg%</th>
+                        <th className="px-4 py-3 font-semibold tracking-wide text-right">Open</th>
+                        <th className="px-4 py-3 font-semibold tracking-wide text-right">High</th>
+                        <th className="px-4 py-3 font-semibold tracking-wide text-right">Low</th>
+                        <th className="px-4 py-3 font-semibold tracking-wide text-right">Prev</th>
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-700">
                     {stocks.map((stock: any) => {
-                        const isPositive = stock.change >= 0;
+                        const changeColor = getChangeColorClass(stock.changePercent);
                         return (
-                            <tr key={stock.symbol} className="hover:bg-gray-900/60 transition-colors group">
-                                <td className="px-6 py-4">
-                                    <div className="flex items-center space-x-4">
-                                        {stock.logo ? (
-                                            <div className="w-10 h-10 relative overflow-hidden bg-gray-900 border border-gray-600">
-                                                <Image
-                                                    src={stock.logo}
-                                                    alt={stock.symbol}
-                                                    fill
-                                                    className="object-contain p-1.5"
-                                                />
-                                            </div>
-                                        ) : (
-                                            <div className="w-10 h-10 bg-teal-500 flex items-center justify-center text-xs font-bold text-gray-900 border border-gray-600">
-                                                {stock.symbol[0]}
-                                            </div>
-                                        )}
-                                        <div className="flex flex-col">
-                                            <span className="font-semibold text-gray-100 text-base">{stock.name}</span>
-                                        </div>
-                                    </div>
+                            <tr key={stock.symbol} className="hover:bg-gray-900/60 transition-colors">
+                                <td className="px-4 py-3 font-semibold text-gray-100">{stock.symbol}</td>
+                                <td className="px-4 py-3 text-right text-gray-100 font-medium">{formatCurrency(stock.price)}</td>
+                                <td className={`px-4 py-3 text-right font-medium ${changeColor}`}>
+                                    {stock.change >= 0 ? '+' : ''}{stock.change?.toFixed(2)}
                                 </td>
-                                <td className="px-6 py-4 font-medium text-gray-300">
-                                    <span className="bg-gray-900 px-2.5 py-1 text-xs font-mono border border-gray-600">
-                                        {stock.symbol}
-                                    </span>
+                                <td className={`px-4 py-3 text-right font-medium ${changeColor}`}>
+                                    {stock.changePercent >= 0 ? '+' : ''}{stock.changePercent?.toFixed(2)}%
                                 </td>
-                                <td className="px-6 py-4 text-gray-100 font-medium text-base tracking-tight">
-                                    {formatCurrency(stock.price)}
-                                </td>
-                                <td className={`px-6 py-4 font-medium`}>
-                                    <div className={`tag flex items-center w-fit ${isPositive ? "tag-accent" : "tag-neutral"}`}>
-                                        {isPositive ? <ChevronUp className="w-3.5 h-3.5 mr-1.5" /> : <ChevronDown className="w-3.5 h-3.5 mr-1.5" />}
-                                        {Math.abs(stock.changePercent).toFixed(2)}%
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4 text-gray-400 font-medium">
-                                    {formatNumber(stock.marketCap)}
-                                </td>
-                                <td className="px-6 py-4 text-right">
-                                    <div className="flex items-center justify-end space-x-3 opacity-80 group-hover:opacity-100 transition-opacity">
-                                        <CreateAlertModal
-                                            userId={userId}
-                                            symbol={stock.symbol}
-                                            currentPrice={stock.price}
-                                            onAlertCreated={onRefresh}
-                                        >
-                                            <button className="p-2.5 text-gray-400 hover:text-gray-100 hover:bg-gray-900 transition-all border border-transparent hover:border-gray-600" title="Add Alert">
-                                                <Bell className="w-4.5 h-4.5" />
-                                            </button>
-                                        </CreateAlertModal>
-
-                                        <div className="transform scale-95 hover:scale-100 transition-transform">
-                                            <WatchlistButton
-                                                symbol={stock.symbol}
-                                                company={stock.name}
-                                                isInWatchlist={true}
-                                                type="icon"
-                                                showTrashIcon={false}
-                                                onWatchlistChange={async (sym, added) => {
-                                                    if (!added) {
-                                                        await removeFromWatchlist(userId, sym);
-                                                        // Update local list faster than full page refresh if you want
-                                                        setStocks((curr: any[]) => curr.filter((s: any) => s.symbol !== sym));
-                                                        if (onRefresh) onRefresh();
-                                                    }
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-                                </td>
+                                <td className="px-4 py-3 text-right text-gray-400">{formatCurrency(stock.open)}</td>
+                                <td className="px-4 py-3 text-right text-gray-400">{formatCurrency(stock.high)}</td>
+                                <td className="px-4 py-3 text-right text-gray-400">{formatCurrency(stock.low)}</td>
+                                <td className="px-4 py-3 text-right text-gray-400">{formatCurrency(stock.previousClose)}</td>
                             </tr>
                         );
                     })}
