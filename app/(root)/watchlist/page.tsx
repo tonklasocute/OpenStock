@@ -39,9 +39,9 @@ export default async function WatchlistPage() {
     return (
         <div className="min-h-screen bg-gray-900 text-gray-100 p-6 md:p-8">
             {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 pb-6 border-b-2 border-gray-600">
                 <div>
-                    <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-100 to-gray-500">
+                    <h1 className="text-3xl font-extrabold text-gray-100">
                         Watchlist
                     </h1>
                     <p className="text-gray-500 mt-1">Track your favorite stocks and manage alerts.</p>
